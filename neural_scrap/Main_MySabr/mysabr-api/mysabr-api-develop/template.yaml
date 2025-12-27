@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  MyQuarkusLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler
+      Runtime: java21
+      CodeUri: build/function.zip
+      MemorySize: 1024
+      Timeout: 30
+      Events:
+        MySabrEndpoint:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY

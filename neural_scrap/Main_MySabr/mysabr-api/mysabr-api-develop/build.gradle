@@ -1,0 +1,67 @@
+plugins {
+    id 'java'
+    id 'io.quarkus' version '3.22.3'
+}
+
+group = 'com.mysabr'
+version = '1.0.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    quarkusPlatformGroupId = 'io.quarkus.platform'
+    quarkusPlatformArtifactId = 'quarkus-bom'
+    quarkusPlatformVersion = '3.22.3'
+    jdbiVersion = '3.43.0'
+    lombokVersion = '1.18.30'
+    favreBcryptVersion = '0.9.0'
+    awsVersion = '2.25.8'
+    auth0JwtVersion = '4.4.0'
+    passayVersion = '1.6.3'
+    redisVersion = '5.1.0'
+}
+
+dependencies {
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+
+    implementation 'io.quarkus:quarkus-resteasy'
+    implementation 'io.quarkus:quarkus-resteasy-jackson'
+    implementation 'io.quarkus:quarkus-arc'
+    implementation 'io.quarkus:quarkus-jdbc-postgresql'
+    implementation 'io.quarkus:quarkus-hibernate-orm'
+    implementation 'io.quarkus:quarkus-agroal'
+    implementation 'io.quarkus:quarkus-hibernate-validator'
+    implementation 'io.quarkus:quarkus-amazon-lambda'
+    implementation 'io.quarkus:quarkus-amazon-lambda-rest'
+    implementation("io.quarkus:quarkus-smallrye-openapi")
+    implementation("io.quarkus:quarkus-swagger-ui")
+
+    implementation platform("software.amazon.awssdk:bom:${awsVersion}")
+    implementation("software.amazon.awssdk:auth")
+    implementation 'software.amazon.awssdk:eventbridge'
+
+    implementation "org.jdbi:jdbi3-core:$jdbiVersion"
+    implementation "org.jdbi:jdbi3-sqlobject:$jdbiVersion"
+    implementation "redis.clients:jedis:${redisVersion}"
+    implementation "com.auth0:java-jwt:${auth0JwtVersion}"
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['-parameters']
+}
