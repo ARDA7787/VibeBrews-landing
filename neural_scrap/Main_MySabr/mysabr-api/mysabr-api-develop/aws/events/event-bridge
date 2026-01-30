@@ -1,1 +1,0 @@
-aws --endpoint-url=http://localhost:4566 events create-event-bus --name mysabr-event-bus
