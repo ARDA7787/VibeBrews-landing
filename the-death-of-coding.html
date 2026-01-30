@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Death of Coding | VibeBrews</title>
+    <meta name="description"
+        content="Why learning to code might be the biggest waste of time in 2026. A journalist's perspective on the post-code era.">
+    <meta name="keywords"
+        content="no code revolution, death of coding, AI game creation, future of programming, VibeBrews review, game development without code">
+    
+    <!-- Favicon -->
+    <link rel="icon" id="favicon" type="image/png" href="">
+    <script>
+        (function() {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const size = 32, radius = 10;
+                canvas.width = size; canvas.height = size;
+                const ctx = canvas.getContext('2d');
+                ctx.beginPath();
+                ctx.moveTo(radius, 0); ctx.lineTo(size - radius, 0);
+                ctx.quadraticCurveTo(size, 0, size, radius);
+                ctx.lineTo(size, size - radius);
+                ctx.quadraticCurveTo(size, size, size - radius, size);
+                ctx.lineTo(radius, size);
+                ctx.quadraticCurveTo(0, size, 0, size - radius);
+                ctx.lineTo(0, radius);
+                ctx.quadraticCurveTo(0, 0, radius, 0);
+                ctx.closePath(); ctx.clip();
+                ctx.drawImage(img, 0, 0, size, size);
+                const favicon = document.getElementById('favicon');
+                if (favicon) favicon.href = canvas.toDataURL('image/png');
+            };
+            img.src = 'assets/logo-white-96x96.png';
+        })();
+    </script>
+    
+    <link rel="canonical" href="https://vibebrews.com/the-death-of-coding">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="The Death of Coding is Here. Good Riddance.">
+    <meta property="og:description" content="I spent 20 years telling people to learn to code. I was wrong.">
+    <meta property="og:image" content="https://vibebrews.com/og-death-of-coding.jpg">
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+                    colors: { bg: '#050505', surface: '#121212', primary: '#FF5C00', secondary: '#5D3FD3' }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <style>
+        body { background-color: #050505; color: #F5F5F5; margin: 0; overflow-x: hidden; }
+        .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: 260px; background: #000; border-right: 1px solid rgba(255,255,255,0.04); z-index: 100; transform: translateX(0); transition: transform 0.3s ease; }
+        .main-content { margin-left: 260px; position: relative; z-index: 10; }
+        @media (max-width: 968px) { .sidebar { transform: translateX(-100%); } .main-content { margin-left: 0; } .sidebar.open { transform: translateX(0); } }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        .glitch-text { position: relative; }
+        .glitch-text::before, .glitch-text::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8; }
+        .glitch-text::before { color: #f0f; z-index: -1; animation: glitch-anim-1 2s infinite linear alternate-reverse; }
+        .glitch-text::after { color: #0ff; z-index: -2; animation: glitch-anim-2 2s infinite linear alternate-reverse; }
+        @keyframes glitch-anim-1 { 0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 1px); } 100% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); } }
+        @keyframes glitch-anim-2 { 0% { clip-path: inset(10% 0 60% 0); transform: translate(2px, 1px); } 100% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, -1px); } }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button id="menuToggle" class="fixed top-4 left-4 z-[101] p-2 bg-black/80 border border-white/10 rounded-lg lg:hidden text-white">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+
+    <!-- Sidebar (Copied from index.html for consistency) -->
+    <aside class="sidebar" id="sidebar">
+        <div class="p-5 border-b border-white/5">
+            <a href="index.html" class="flex items-center gap-3 text-white no-underline">
+                <img src="assets/logo-white-48x48.png" class="w-8 h-8 rounded-lg" alt="Logo">
+                <span class="font-display font-bold">VibeBrews</span>
+            </a>
+        </div>
+        <nav class="flex-1 py-4 overflow-y-auto">
+            <div class="px-3 mb-6">
+                <div class="px-3 py-2 text-[11px] font-bold text-white/30 uppercase tracking-wider">Pages</div>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2.5 text-sm text-white/60 rounded-lg hover:bg-white/5 hover:text-white transition-colors">Home</a>
+                <a href="how-to-make-a-game-without-coding.html" class="flex items-center gap-3 px-3 py-2.5 text-sm text-white/60 rounded-lg hover:bg-white/5 hover:text-white transition-colors">How to Make Games</a>
+                <a href="i-have-a-game-idea.html" class="flex items-center gap-3 px-3 py-2.5 text-sm text-white/60 rounded-lg hover:bg-white/5 hover:text-white transition-colors">I Have an Idea</a>
+                <a href="our-vision.html" class="flex items-center gap-3 px-3 py-2.5 text-sm text-white/60 rounded-lg hover:bg-white/5 hover:text-white transition-colors">Our Vision</a>
+                <a href="productive-things-to-do-on-phone.html" class="flex items-center gap-3 px-3 py-2.5 text-sm text-white/60 rounded-lg hover:bg-white/5 hover:text-white transition-colors">Productive Play</a>
+                <a href="why-i-stopped-learning-unity.html" class="flex items-center gap-3 px-3 py-2.5 text-sm text-white/60 rounded-lg hover:bg-white/5 hover:text-white transition-colors">Why I Quit Unity</a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-sm text-white bg-white/10 font-medium rounded-lg">The Death of Coding</a>
+                <a href="the-creative-block-is-a-lie.html" class="flex items-center gap-3 px-3 py-2.5 text-sm text-white/60 rounded-lg hover:bg-white/5 hover:text-white transition-colors">The Creative Lie</a>
+                <a href="the-game-you-will-never-make.html" class="flex items-center gap-3 px-3 py-2.5 text-sm text-white/60 rounded-lg hover:bg-white/5 hover:text-white transition-colors">The Game You'll Never Make</a>
+            </div>
+        </nav>
+        <div class="p-5 border-t border-white/5">
+            <a href="https://play.google.com/store/apps/details?id=com.nextap.vibebrews" target="_blank" class="block w-full py-2.5 text-center text-sm font-bold bg-white text-black rounded-lg hover:opacity-90 transition-opacity">Download App</a>
+        </div>
+    </aside>
+
+    <div id="root" class="main-content"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        // --- 3D Background Component ---
+        const CinematicBackground = ({ scrollY }) => {
+            const mountRef = useRef(null);
+            
+            useEffect(() => {
+                if (!mountRef.current) return;
+                
+                // Scene Setup
+                const scene = new THREE.Scene();
+                scene.fog = new THREE.FogExp2(0x000000, 0.002);
+                
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                mountRef.current.appendChild(renderer.domElement);
+
+                // Objects: "Dead Code" Cubes
+                const geometry = new THREE.BoxGeometry(1, 1, 1);
+                const material = new THREE.MeshBasicMaterial({ color: 0x333333, wireframe: true, transparent: true, opacity: 0.3 });
+                const cubes = [];
+                
+                for (let i = 0; i < 400; i++) {
+                    const cube = new THREE.Mesh(geometry, material);
+                    cube.position.x = (Math.random() - 0.5) * 100;
+                    cube.position.y = (Math.random() - 0.5) * 100;
+                    cube.position.z = (Math.random() - 0.5) * 100;
+                    cube.rotation.x = Math.random() * Math.PI;
+                    cube.rotation.y = Math.random() * Math.PI;
+                    cube.userData = { 
+                        speed: Math.random() * 0.02, 
+                        axis: new THREE.Vector3(Math.random(), Math.random(), Math.random()).normalize() 
+                    };
+                    scene.add(cube);
+                    cubes.push(cube);
+                }
+
+                // "New Life" Particles (appear later)
+                const particlesGeo = new THREE.BufferGeometry();
+                const particleCount = 2000;
+                const posArray = new Float32Array(particleCount * 3);
+                for(let i = 0; i < particleCount * 3; i++) {
+                    posArray[i] = (Math.random() - 0.5) * 150;
+                }
+                particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+                const particlesMat = new THREE.PointsMaterial({ size: 0.1, color: 0xFF5C00, transparent: true, opacity: 0 });
+                const particles = new THREE.Points(particlesGeo, particlesMat);
+                scene.add(particles);
+
+                camera.position.z = 50;
+
+                // Animation Loop
+                let frameId;
+                const animate = () => {
+                    frameId = requestAnimationFrame(animate);
+                    
+                    // Rotate cubes
+                    cubes.forEach(cube => {
+                        cube.rotation.x += cube.userData.speed;
+                        cube.rotation.y += cube.userData.speed;
+                    });
+
+                    // Scroll Interaction
+                    const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+                    
+                    // Camera Movement: Fly through the field
+                    camera.position.z = 50 - (scrollPercent * 100);
+                    camera.rotation.z = scrollPercent * Math.PI * 0.5;
+                    
+                    // Transition effects based on scroll
+                    if (scrollPercent > 0.5) {
+                        // Transition to "VibeBrews" colors
+                        material.color.setHex(0x111111);
+                        material.opacity = Math.max(0, 0.3 - (scrollPercent - 0.5) * 2); // Fade out cubes
+                        particlesMat.opacity = Math.min(0.8, (scrollPercent - 0.5) * 3); // Fade in particles
+                        scene.fog.color.setHex(0x050505);
+                    } else {
+                        material.color.setHex(0x333333);
+                        material.opacity = 0.3;
+                        particlesMat.opacity = 0;
+                    }
+
+                    renderer.render(scene, camera);
+                };
+                animate();
+
+                // Resize Handler
+                const handleResize = () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                };
+                window.addEventListener('resize', handleResize);
+
+                return () => {
+                    cancelAnimationFrame(frameId);
+                    window.removeEventListener('resize', handleResize);
+                    if (mountRef.current) mountRef.current.innerHTML = '';
+                };
+            }, []);
+
+            return <div ref={mountRef} className="fixed inset-0 z-0 pointer-events-none" />;
+        };
+
+        // --- Content Components ---
+        const Section = ({ children, className = "" }) => (
+            <section className={`relative z-10 min-h-screen flex flex-col justify-center items-center px-6 py-20 ${className}`}>
+                <div className="max-w-3xl w-full">
+                    {children}
+                </div>
+            </section>
+        );
+
+        const FadeIn = ({ children, delay = 0 }) => {
+            const [isVisible, setIsVisible] = useState(false);
+            const ref = useRef(null);
+
+            useEffect(() => {
+                const observer = new IntersectionObserver(([entry]) => {
+                    if (entry.isIntersecting) setIsVisible(true);
+                }, { threshold: 0.2 });
+                if (ref.current) observer.observe(ref.current);
+                return () => observer.disconnect();
+            }, []);
+
+            return (
+                <div ref={ref} className={`transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ transitionDelay: `${delay}ms` }}>
+                    {children}
+                </div>
+            );
+        };
+
+        const CodeBlock = () => (
+            <div className="bg-[#1e1e1e] p-6 rounded-lg font-mono text-sm text-gray-300 border border-white/10 shadow-2xl my-8 relative overflow-hidden group">
+                <div className="absolute top-0 left-0 w-full h-1 bg-red-500/50"></div>
+                <div className="flex gap-2 mb-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+                <div className="opacity-50 group-hover:opacity-100 transition-opacity">
+                    <span className="text-purple-400">class</span> <span className="text-yellow-300">GameController</span> <span className="text-white">{`{`}</span><br/>
+                    &nbsp;&nbsp;<span className="text-purple-400">void</span> <span className="text-blue-400">Update</span>() <span className="text-white">{`{`}</span><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">// TODO: Fix physics glitch</span><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-red-400">NullReferenceException: Object reference not set...</span><br/>
+                    &nbsp;&nbsp;<span className="text-white">{`}`}</span><br/>
+                    <span className="text-white">{`}`}</span>
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">
+                    <p className="text-red-500 font-bold uppercase tracking-widest">Obsolete</p>
+                </div>
+            </div>
+        );
+
+        const BlogPost = () => {
+            const [scrollY, setScrollY] = useState(0);
+
+            useEffect(() => {
+                const handleScroll = () => setScrollY(window.scrollY);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            return (
+                <div className="font-sans text-gray-200 selection:bg-primary/30 selection:text-white">
+                    <CinematicBackground scrollY={scrollY} />
+                    
+                    {/* Header / Hook */}
+                    <Section>
+                        <FadeIn>
+                            <span className="text-primary font-mono text-xs uppercase tracking-[0.2em] mb-4 block">Opinion</span>
+                            <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight mb-8 glitch-text" data-text="The Death of Coding.">
+                                The Death of Coding.
+                            </h1>
+                            <div className="flex items-center gap-4 text-sm text-gray-500 font-mono mb-12">
+                                <div className="w-10 h-10 rounded-full bg-gray-800 overflow-hidden">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Hans&backgroundColor=b6e3f4" alt="Hans" />
+                                </div>
+                                <div>
+                                    <p className="text-white">By Hans Müller</p>
+                                    <p>Tech Journalist, Hamburg</p>
+                                </div>
+                                <div className="ml-auto">Jan 26, 2026</div>
+                            </div>
+                        </FadeIn>
+                        
+                        <FadeIn delay={200}>
+                            <p className="text-xl md:text-2xl leading-relaxed text-gray-300 font-light drop-shadow-lg">
+                                I forced my son to learn Python for three years. Last week, I apologized to him. We were optimizing for a future that no longer exists.
+                            </p>
+                        </FadeIn>
+                    </Section>
+
+                    {/* The Problem */}
+                    <Section>
+                        <FadeIn>
+                            <h2 className="text-3xl font-display font-bold mb-6 text-white">The "Learn to Code" Lie</h2>
+                            <p className="mb-6 text-lg leading-relaxed text-gray-400">
+                                Remember when we told everyone that coding was the new literacy? That if you couldn't write a loop, you'd be illiterate in the 21st century?
+                            </p>
+                            <p className="mb-6 text-lg leading-relaxed text-gray-400">
+                                We were wrong. We confused <strong>syntax</strong> with <strong>creation</strong>.
+                            </p>
+                            <p className="mb-8 text-lg leading-relaxed text-gray-400">
+                                Coding is plumbing. It is welding. It is necessary infrastructure, yes. But do you need to know how to solder a circuit board to use an iPhone? No. You just touch the glass.
+                            </p>
+                            <CodeBlock />
+                            <p className="text-sm text-center text-gray-600 italic mt-2">This is not creativity. This is bureaucracy.</p>
+                        </FadeIn>
+                    </Section>
+
+                    {/* The Solution / VibeBrews Intro */}
+                    <Section>
+                        <FadeIn>
+                            <div className="border-l-2 border-primary pl-6 mb-12">
+                                <p className="text-2xl font-display italic text-white">
+                                    "The gap between having an idea and seeing it alive should be zero."
+                                </p>
+                            </div>
+                            
+                            <h2 className="text-3xl font-display font-bold mb-6 text-white">Enter the "Vibe" Era</h2>
+                            <p className="mb-6 text-lg leading-relaxed text-gray-400">
+                                I found an app called <strong>VibeBrews</strong>. Terrible name. Incredible technology.
+                            </p>
+                            <p className="mb-6 text-lg leading-relaxed text-gray-400">
+                                My son didn't write code. He didn't open a terminal. He opened the app and typed: <span className="text-white bg-white/10 px-2 py-1 rounded font-mono text-base">"A game where I am a slice of toast fighting a toaster in space."</span>
+                            </p>
+                            <p className="mb-6 text-lg leading-relaxed text-gray-400">
+                                45 seconds later, he was playing it with his sister. Multiplayer. On their phones.
+                            </p>
+                        </FadeIn>
+                    </Section>
+
+                    {/* The Comparison Visual */}
+                    <Section>
+                        <FadeIn>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                                <div className="bg-white/5 p-8 rounded-2xl border border-white/10">
+                                    <h3 className="text-red-400 font-mono text-sm uppercase mb-4">The Old Way (Unity/Unreal)</h3>
+                                    <ul className="space-y-4 text-gray-400 text-sm">
+                                        <li className="flex gap-3">❌ <span className="line-through">Download 20GB Engine</span></li>
+                                        <li className="flex gap-3">❌ <span className="line-through">Watch 40 hours of tutorials</span></li>
+                                        <li className="flex gap-3">❌ <span className="line-through">Fix compiler errors</span></li>
+                                        <li className="flex gap-3">❌ <span className="line-through">Give up</span></li>
+                                    </ul>
+                                </div>
+                                <div className="bg-gradient-to-br from-primary/20 to-purple-900/20 p-8 rounded-2xl border border-primary/30 relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 p-2 bg-primary text-black text-xs font-bold uppercase">The Vibe Way</div>
+                                    <h3 className="text-primary font-mono text-sm uppercase mb-4">VibeBrews</h3>
+                                    <ul className="space-y-4 text-white text-sm">
+                                        <li className="flex gap-3">✅ <span>Have an idea</span></li>
+                                        <li className="flex gap-3">✅ <span>Type it</span></li>
+                                        <li className="flex gap-3">✅ <span>Play it</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </FadeIn>
+                    </Section>
+
+                    {/* Parallax Break */}
+                    <div className="relative h-[60vh] w-full overflow-hidden my-20">
+                        <div className="absolute inset-0 bg-fixed bg-center bg-cover" style={{ backgroundImage: "url('assets/vision-imagination.png')", filter: "grayscale(100%) contrast(120%) brightness(50%)" }}></div>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <h2 className="text-4xl md:text-6xl font-display font-bold text-white text-center px-4 drop-shadow-2xl">
+                                "It feels like magic."
+                            </h2>
+                        </div>
+                    </div>
+
+                    {/* Addressing the Elephant (Competitors/SEO) */}
+                    <Section>
+                        <FadeIn>
+                            <h2 className="text-3xl font-display font-bold mb-6 text-white">Is this the end of Apple's Walled Garden?</h2>
+                            <p className="mb-6 text-lg leading-relaxed text-gray-400">
+                                Companies like Apple and Epic Games built empires on gatekeeping. You need their hardware, their stores, their approval to publish.
+                            </p>
+                            <p className="mb-6 text-lg leading-relaxed text-gray-400">
+                                Tools like Cursor (which I use to write) make coding faster. But VibeBrews makes coding <em>invisible</em>. It's peer-to-peer. No servers. No app store approval for every little experiment.
+                            </p>
+                            <p className="mb-6 text-lg leading-relaxed text-gray-400">
+                                It feels like the early internet. Messy. Wild. Free.
+                            </p>
+                        </FadeIn>
+                    </Section>
+
+                    {/* CTA / Conclusion */}
+                    <Section>
+                        <FadeIn>
+                            <div className="text-center">
+                                <h2 className="text-4xl font-display font-bold mb-8 text-white">Stop Coding. Start Creating.</h2>
+                                <p className="mb-12 text-xl text-gray-400 max-w-xl mx-auto">
+                                    You don't get points for difficulty. You get points for shipping.
+                                </p>
+                                
+                                <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
+                                    <a href="https://play.google.com/store/apps/details?id=com.nextap.vibebrews" target="_blank" className="px-8 py-4 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+                                        Try VibeBrews (Free)
+                                    </a>
+                                    <a href="how-to-make-a-game-without-coding.html" className="text-gray-400 hover:text-white underline decoration-gray-600 underline-offset-4">
+                                        Read: How it works
+                                    </a>
+                                </div>
+                            </div>
+                        </FadeIn>
+                    </Section>
+                    
+                    {/* Footer Spacer */}
+                    <div className="h-20"></div>
+
+                    {/* Footer */}
+                    <footer className="py-20 border-t border-white/5 bg-black relative z-20">
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
+                                <a href="index.html" className="flex items-center gap-3 text-white no-underline">
+                                    <img src="assets/logo-white-48x48.png" alt="" className="w-8 h-8 rounded-lg shadow-lg" />
+                                    <span className="font-display font-bold text-xl">VibeBrews</span>
+                                </a>
+                                <nav className="flex gap-8 text-sm text-gray-500">
+                                    <a href="how-to-make-a-game-without-coding.html" className="hover:text-white transition-colors">How to Make Games</a>
+                                    <a href="our-vision.html" className="hover:text-white transition-colors">Our Vision</a>
+                                    <a href="productive-things-to-do-on-phone.html" className="hover:text-white transition-colors">Productive Play</a>
+                                </nav>
+                                <a href="https://play.google.com/store/apps/details?id=com.nextap.vibebrews" target="_blank" className="bg-white text-black text-sm font-semibold px-6 py-2.5 rounded-full hover:bg-gray-200 transition-colors">Download App</a>
+                            </div>
+                            <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                                <div className="text-gray-500 text-sm">© 2026 VibeBrews. All rights reserved.</div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<BlogPost />);
+
+        // Mobile Menu Logic
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            document.getElementById('sidebar').classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

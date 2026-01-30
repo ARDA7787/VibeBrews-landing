@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Game You'll Never Make | VibeBrews</title>
+    <meta name="description"
+        content="47 unfinished projects. 3AM promises. Endless tutorials. Sound familiar? The truth about why you can't finish your game - and what actually works.">
+    <meta name="keywords"
+        content="why cant i finish my game, game development burnout, unfinished game projects, too many game ideas, creative block game dev, how to actually ship a game, side project graveyard">
+    
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vibebrews.com/the-game-you-will-never-make">
+    
+    <!-- Favicon -->
+    <link rel="icon" id="favicon" type="image/png" href="">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/logo-white-180x180.png">
+    <script>
+        (function() {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const size = 32, radius = 10;
+                canvas.width = size; canvas.height = size;
+                const ctx = canvas.getContext('2d');
+                ctx.beginPath();
+                ctx.moveTo(radius, 0); ctx.lineTo(size - radius, 0);
+                ctx.quadraticCurveTo(size, 0, size, radius);
+                ctx.lineTo(size, size - radius);
+                ctx.quadraticCurveTo(size, size, size - radius, size);
+                ctx.lineTo(radius, size);
+                ctx.quadraticCurveTo(0, size, 0, size - radius);
+                ctx.lineTo(0, radius);
+                ctx.quadraticCurveTo(0, 0, radius, 0);
+                ctx.closePath(); ctx.clip();
+                ctx.drawImage(img, 0, 0, size, size);
+                const favicon = document.getElementById('favicon');
+                if (favicon) favicon.href = canvas.toDataURL('image/png');
+            };
+            img.src = 'assets/logo-white-96x96.png';
+        })();
+    </script>
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://vibebrews.com/the-game-you-will-never-make">
+    <meta property="og:title" content="The Game You'll Never Make">
+    <meta property="og:description" content="47 unfinished projects. 3AM promises. The truth about why you can't ship - and what actually works.">
+    <meta property="og:image" content="https://vibebrews.com/assets/og-never-make.jpg">
+    <meta property="og:site_name" content="VibeBrews">
+    <meta property="article:published_time" content="2026-01-26">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Game You'll Never Make">
+    <meta name="twitter:description" content="47 unfinished projects. 3AM promises. Sound familiar?">
+    <meta name="twitter:image" content="https://vibebrews.com/assets/og-never-make.jpg">
+    
+    <!-- JSON-LD Article Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "The Game You'll Never Make",
+        "description": "47 unfinished projects. 3AM promises. Endless tutorials. Sound familiar? The truth about why you can't finish your game.",
+        "image": "https://vibebrews.com/assets/og-never-make.jpg",
+        "author": { "@type": "Person", "name": "Lena Bergström", "jobTitle": "Tech Journalist" },
+        "publisher": { "@type": "Organization", "name": "VibeBrews", "logo": { "@type": "ImageObject", "url": "https://vibebrews.com/logo.png" } },
+        "datePublished": "2026-01-26",
+        "dateModified": "2026-01-26"
+    }
+    </script>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'SF Pro Display';
+            src: local('SF Pro Display'), local('.SF NS Display'), local('Helvetica Neue');
+            font-weight: 100 900;
+            font-style: normal;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            --color-bg: #030303;
+            --color-surface: #0a0a0a;
+            --color-surface-elevated: #111111;
+            --color-border: rgba(255, 255, 255, 0.06);
+            --color-text-primary: rgba(255, 255, 255, 0.95);
+            --color-text-secondary: rgba(255, 255, 255, 0.6);
+            --color-text-tertiary: rgba(255, 255, 255, 0.3);
+            
+            /* Vibrant accent colors */
+            --color-cyan: #00F5FF;
+            --color-magenta: #FF00E5;
+            --color-orange: #FF5C00;
+            --color-purple: #8B5CF6;
+            --color-green: #10B981;
+            
+            --font-display: 'Space Grotesk', -apple-system, sans-serif;
+            --font-sans: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
+            --font-mono: 'SF Mono', SFMono-Regular, Consolas, monospace;
+            
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--color-text-secondary);
+            background: var(--color-bg);
+            overflow-x: hidden;
+        }
+        
+        ::selection {
+            background: var(--color-magenta);
+            color: #000;
+        }
+        
+        /* ==================== THREE.JS CANVAS ==================== */
+        #three-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        /* ==================== SIDEBAR ==================== */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 260px;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--color-border);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s var(--ease-out-expo);
+        }
+        
+        .sidebar-header {
+            padding: 20px 22px;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            text-decoration: none;
+        }
+        
+        .sidebar-logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+        
+        .sidebar-nav {
+            flex: 1;
+            padding: 16px 12px;
+            overflow-y: auto;
+        }
+        
+        .sidebar-section-title {
+            padding: 8px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            margin-bottom: 2px;
+        }
+        
+        .sidebar-link:hover {
+            background: rgba(255,255,255,0.05);
+            color: var(--color-text-primary);
+        }
+        
+        .sidebar-link.active {
+            background: rgba(255,255,255,0.1);
+            color: var(--color-text-primary);
+            font-weight: 500;
+        }
+        
+        .sidebar-link svg {
+            width: 18px;
+            height: 18px;
+            opacity: 0.5;
+        }
+        
+        .sidebar-footer {
+            padding: 20px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .sidebar-cta {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: #000;
+            background: #fff;
+            padding: 12px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        
+        .sidebar-cta:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+        
+        /* Mobile menu toggle */
+        .menu-toggle {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 1001;
+            width: 44px;
+            height: 44px;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--color-text-primary);
+        }
+        
+        .menu-toggle svg {
+            width: 22px;
+            height: 22px;
+        }
+        
+        /* ==================== MAIN CONTENT ==================== */
+        .main {
+            margin-left: 260px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* ==================== SCROLL PROGRESS ==================== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 260px;
+            right: 0;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            z-index: 999;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--color-cyan), var(--color-magenta), var(--color-orange));
+            transition: width 0.1s linear;
+        }
+        
+        /* ==================== SECTIONS ==================== */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 80px 40px;
+        }
+        
+        .section-content {
+            max-width: 720px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 40px;
+        }
+        
+        .hero-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--color-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out-expo) 0.3s forwards;
+        }
+        
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 10vw, 120px);
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out-expo) 0.5s forwards;
+        }
+        
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--color-cyan), var(--color-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(18px, 2.5vw, 24px);
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto 48px;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out-expo) 0.7s forwards;
+        }
+        
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out-expo) 0.9s forwards;
+        }
+        
+        .hero-meta-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hero-meta-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-purple), var(--color-magenta));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: #fff;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-text-tertiary);
+            font-size: 12px;
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+        
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ==================== TEXT BLOCKS ==================== */
+        .text-block {
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 48px;
+            border-radius: 24px;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s var(--ease-out-expo);
+        }
+        
+        .text-block.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .text-block h2 {
+            font-family: var(--font-display);
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+        }
+        
+        .text-block h3 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin: 40px 0 16px;
+        }
+        
+        .text-block p {
+            margin-bottom: 24px;
+        }
+        
+        .text-block p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .text-block strong {
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+        
+        .text-block em {
+            color: var(--color-cyan);
+            font-style: normal;
+        }
+        
+        .text-block a {
+            color: var(--color-cyan);
+            text-decoration: underline;
+            text-decoration-color: rgba(0, 245, 255, 0.3);
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.2s ease;
+        }
+        
+        .text-block a:hover {
+            text-decoration-color: var(--color-cyan);
+        }
+        
+        /* ==================== VISUAL BLOCKS ==================== */
+        .visual-block {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 32px 0;
+            position: relative;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        
+        .visual-block img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .visual-block-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 24px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            font-family: var(--font-mono);
+        }
+        
+        /* Diagram styles */
+        .diagram-container {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 32px 0;
+        }
+        
+        .diagram-container img {
+            width: 100%;
+            height: auto;
+            filter: saturate(1.2);
+        }
+        
+        /* ==================== QUOTE BLOCK ==================== */
+        .quote-block {
+            padding: 40px;
+            border-left: 4px solid var(--color-magenta);
+            background: linear-gradient(135deg, rgba(255,0,229,0.1), rgba(139,92,246,0.05));
+            border-radius: 0 20px 20px 0;
+            margin: 40px 0;
+        }
+        
+        .quote-text {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+        
+        .quote-author {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+        }
+        
+        /* ==================== COMPARISON GRID ==================== */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 40px 0;
+        }
+        
+        .comparison-card {
+            padding: 32px;
+            border-radius: 20px;
+            border: 1px solid var(--color-border);
+        }
+        
+        .comparison-card.bad {
+            background: rgba(255,50,50,0.05);
+            border-color: rgba(255,50,50,0.2);
+        }
+        
+        .comparison-card.good {
+            background: linear-gradient(135deg, rgba(0,245,255,0.1), rgba(255,0,229,0.05));
+            border-color: rgba(0,245,255,0.3);
+        }
+        
+        .comparison-card h4 {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+        
+        .comparison-card.bad h4 {
+            color: #ff5050;
+        }
+        
+        .comparison-card.good h4 {
+            color: var(--color-cyan);
+        }
+        
+        .comparison-card ul {
+            list-style: none;
+        }
+        
+        .comparison-card li {
+            padding: 8px 0;
+            font-size: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .comparison-card.bad li {
+            color: rgba(255,255,255,0.5);
+            text-decoration: line-through;
+        }
+        
+        .comparison-card.good li {
+            color: var(--color-text-primary);
+        }
+        
+        /* ==================== CINEMATIC BREAK ==================== */
+        .cinematic-break {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            min-height: 500px;
+            overflow: hidden;
+            margin: 0 -40px;
+            width: calc(100% + 80px);
+        }
+        
+        .cinematic-break-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: saturate(1.3) contrast(1.1);
+        }
+        
+        .cinematic-break-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, 
+                rgba(3,3,3,1) 0%,
+                rgba(3,3,3,0.3) 30%,
+                rgba(3,3,3,0.3) 70%,
+                rgba(3,3,3,1) 100%
+            );
+        }
+        
+        .cinematic-break-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .cinematic-break-text {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 6vw, 64px);
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 4px 40px rgba(0,0,0,0.8);
+            max-width: 800px;
+        }
+        
+        /* ==================== CTA SECTION ==================== */
+        .cta-section {
+            padding: 120px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--color-border));
+        }
+        
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+        
+        .cta-subtitle {
+            font-size: 20px;
+            color: var(--color-text-secondary);
+            margin-bottom: 40px;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, var(--color-cyan), var(--color-magenta));
+            color: #000;
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.3s var(--ease-out-expo);
+            box-shadow: 0 20px 60px rgba(0,245,255,0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(255,0,229,0.4);
+        }
+        
+        .cta-button svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .cta-secondary-links {
+            margin-top: 32px;
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            font-size: 14px;
+        }
+        
+        .cta-secondary-links a {
+            color: var(--color-text-tertiary);
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .cta-secondary-links a:hover {
+            color: var(--color-text-primary);
+            text-decoration-color: var(--color-text-primary);
+        }
+        
+        /* ==================== RELATED ARTICLES ==================== */
+        .related-section {
+            padding: 80px 40px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .related-title {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-text-tertiary);
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .related-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 28px;
+            text-decoration: none;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+        
+        .related-card:hover {
+            background: var(--color-surface-elevated);
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.12);
+        }
+        
+        .related-card-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .related-card-desc {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+        }
+        
+        /* ==================== FOOTER ==================== */
+        .footer {
+            padding: 48px 40px;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-text-secondary);
+        }
+        
+        .footer-copy {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+        }
+        
+        .footer-copy a {
+            color: inherit;
+            text-decoration: underline;
+        }
+        
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 968px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .main {
+                margin-left: 0;
+            }
+            
+            .progress-bar {
+                left: 0;
+            }
+            
+            .section {
+                padding: 60px 24px;
+            }
+            
+            .text-block {
+                padding: 32px 24px;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cinematic-break {
+                margin: 0 -24px;
+                width: calc(100% + 48px);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 40px;
+            }
+            
+            .text-block h2 {
+                font-size: 26px;
+            }
+            
+            .quote-text {
+                font-size: 22px;
+            }
+        }
+        
+        /* ==================== GLITCH EFFECT ==================== */
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        
+        .glitch::before {
+            color: var(--color-cyan);
+            z-index: -1;
+            animation: glitch-1 2s infinite linear alternate-reverse;
+        }
+        
+        .glitch::after {
+            color: var(--color-magenta);
+            z-index: -2;
+            animation: glitch-2 2s infinite linear alternate-reverse;
+        }
+        
+        @keyframes glitch-1 {
+            0% { clip-path: inset(20% 0 60% 0); transform: translate(-3px, 2px); }
+            20% { clip-path: inset(40% 0 40% 0); transform: translate(3px, -2px); }
+            40% { clip-path: inset(60% 0 20% 0); transform: translate(-3px, 2px); }
+            60% { clip-path: inset(80% 0 5% 0); transform: translate(3px, -2px); }
+            80% { clip-path: inset(10% 0 70% 0); transform: translate(-3px, 2px); }
+            100% { clip-path: inset(50% 0 30% 0); transform: translate(3px, -2px); }
+        }
+        
+        @keyframes glitch-2 {
+            0% { clip-path: inset(50% 0 30% 0); transform: translate(3px, -2px); }
+            20% { clip-path: inset(10% 0 70% 0); transform: translate(-3px, 2px); }
+            40% { clip-path: inset(80% 0 5% 0); transform: translate(3px, -2px); }
+            60% { clip-path: inset(60% 0 20% 0); transform: translate(-3px, 2px); }
+            80% { clip-path: inset(40% 0 40% 0); transform: translate(3px, -2px); }
+            100% { clip-path: inset(20% 0 60% 0); transform: translate(-3px, 2px); }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Three.js Canvas -->
+    <div id="three-canvas"></div>
+    
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+    </button>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <img src="assets/logo-white-48x48.png" alt="VibeBrews">
+                <span>VibeBrews</span>
+            </a>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="sidebar-section-title">Pages</div>
+            <a href="index.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                </svg>
+                Home
+            </a>
+            <a href="how-to-make-a-game-without-coding.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+                How to Make Games
+            </a>
+            <a href="i-have-a-game-idea.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+                I Have an Idea
+            </a>
+            <a href="our-vision.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+                Our Vision
+            </a>
+            <a href="productive-things-to-do-on-phone.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                </svg>
+                Productive Play
+            </a>
+            <a href="why-i-stopped-learning-unity.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                Why I Quit Unity
+            </a>
+            <a href="the-death-of-coding.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                The Death of Coding
+            </a>
+            <a href="the-creative-block-is-a-lie.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                The Creative Lie
+            </a>
+            <a href="the-game-you-will-never-make.html" class="sidebar-link active">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+                </svg>
+                The Game You'll Never Make
+            </a>
+            <a href="the-3am-scroll.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                </svg>
+                The 3AM Scroll
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="https://play.google.com/store/apps/details?id=com.nextap.vibebrews" target="_blank" rel="noopener" class="sidebar-cta">Download App</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+        
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <span class="hero-eyebrow">Opinion / Jan 26, 2026</span>
+            <h1 class="hero-title">
+                The Game You'll<br>
+                <span class="highlight glitch" data-text="Never Make.">Never Make.</span>
+            </h1>
+            <p class="hero-subtitle">
+                47 unfinished projects. 3AM promises to yourself. "This time will be different."<br>
+                We need to talk.
+            </p>
+            <div class="hero-meta">
+                <div class="hero-meta-author">
+                    <div class="hero-meta-avatar">LB</div>
+                    <span>Lena Bergström</span>
+                </div>
+                <span>•</span>
+                <span>8 min read</span>
+            </div>
+            
+            <div class="scroll-indicator">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                </svg>
+                <span>Scroll</span>
+            </div>
+        </section>
+        
+        <!-- Section 1: The Hook -->
+        <section class="section" id="section-1">
+            <div class="section-content">
+                <div class="text-block" data-reveal>
+                    <h2>I Know Your Browser History</h2>
+                    
+                    <p>
+                        Not in a creepy way. But I know you've googled <em>"why can't I finish my projects"</em> at 2AM. I know you have a folder called "Game Ideas" that hasn't been opened since last summer. I know you've started learning three different game engines and finished none.
+                    </p>
+                    
+                    <p>
+                        How do I know? Because I was you. And because the search data doesn't lie.
+                    </p>
+                    
+                    <p>
+                        <strong>"Why can't I finish my game"</strong> gets searched 14,000 times a month. In English alone.
+                    </p>
+                    
+                    <p>
+                        That's 14,000 people, every single month, asking the same desperate question into the void. And the internet gives them the same garbage advice: "Just be more disciplined." "Break it into smaller tasks." "Find your why."
+                    </p>
+                    
+                    <p>
+                        <strong>It's all wrong.</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 2: The Problem -->
+        <section class="section" id="section-2">
+            <div class="section-content">
+                <div class="text-block" data-reveal>
+                    <h2>The Perfectionist's Trap</h2>
+                    
+                    <p>
+                        Let me tell you about Thomas. He's from Kiel. He's 28. He's been "making games" for six years. He has never shipped a single one.
+                    </p>
+                    
+                    <p>
+                        I interviewed him for this piece. Here's what he said:
+                    </p>
+                    
+                    <div class="quote-block">
+                        <p class="quote-text">"Every time I start, I see everything it could become. And then I realize I'm not skilled enough to build that vision. So I start learning. And by the time I've learned enough, I have a new idea."</p>
+                        <p class="quote-author">— Thomas, Game Developer (in theory)</p>
+                    </div>
+                    
+                    <p>
+                        This is the trap. The vision expands faster than your skills. Always. Forever. It's not a bug in your motivation. It's a bug in the process itself.
+                    </p>
+                    
+                    <div class="visual-block">
+                        <img src="assets/never-make-diagram-loop.png" alt="The Perfectionist's Loop Diagram" loading="lazy">
+                        <span class="visual-block-caption">Fig 1. The infinite loop. You're stuck here.</span>
+                    </div>
+                    
+                    <p>
+                        The traditional path to making games is designed to trap you. It's not your fault. It's <a href="why-i-stopped-learning-unity.html">the system's fault</a>.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Cinematic Break 1 -->
+        <section class="section" style="padding: 0;">
+            <div class="cinematic-break">
+                <div class="cinematic-break-bg" style="background-image: url('assets/never-make-graveyard.png');"></div>
+                <div class="cinematic-break-overlay"></div>
+                <div class="cinematic-break-content">
+                    <h2 class="cinematic-break-text">47 projects.<br>47 graveyards.</h2>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 3: The Industry Lie -->
+        <section class="section" id="section-3">
+            <div class="section-content">
+                <div class="text-block" data-reveal>
+                    <h2>The Lie They Told You</h2>
+                    
+                    <p>
+                        The game industry has a dirty secret: they need you to fail.
+                    </p>
+                    
+                    <p>
+                        Think about it. Who benefits when game development is hard?
+                    </p>
+                    
+                    <p>
+                        Tutorial creators. Course sellers. Engine companies charging for "pro" features. Studios that can pay less because "everyone wants to make games." The entire ecosystem is built on the assumption that <em>making games is supposed to be painful</em>.
+                    </p>
+                    
+                    <p>
+                        So they keep telling you: learn C#. Learn shaders. Learn quaternions (whatever those are). Spend 200 hours on a course before you can make a cube move.
+                    </p>
+                    
+                    <div class="comparison-grid">
+                        <div class="comparison-card bad">
+                            <h4>What They Told You</h4>
+                            <ul>
+                                <li>❌ Learn to code first</li>
+                                <li>❌ Master an engine (500+ hours)</li>
+                                <li>❌ Understand math & physics</li>
+                                <li>❌ Build a portfolio</li>
+                                <li>❌ Then maybe start</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-card good">
+                            <h4>What Actually Works</h4>
+                            <ul>
+                                <li>✓ Have an idea</li>
+                                <li>✓ Describe it</li>
+                                <li>✓ Play it</li>
+                                <li>✓ (There is no step 4)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <p>
+                        <strong>The gap between imagination and reality should be seconds, not years.</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 4: The Moment -->
+        <section class="section" id="section-4">
+            <div class="section-content">
+                <div class="text-block" data-reveal>
+                    <h2>The 4-Minute Experiment</h2>
+                    
+                    <p>
+                        I ran an experiment last week. I found an app that lets you describe a game and it... makes it. Sounds like AI nonsense, right? I was skeptical.
+                    </p>
+                    
+                    <p>
+                        I typed: <em>"A game where two astronauts race to collect space crystals while avoiding black holes. Multiplayer."</em>
+                    </p>
+                    
+                    <p>
+                        I timed it.
+                    </p>
+                    
+                    <p>
+                        <strong>3 minutes, 47 seconds.</strong>
+                    </p>
+                    
+                    <p>
+                        That's how long it took from typing to playing with a stranger from Portugal who joined my lobby. We played three rounds. He won twice. I added explosive power-ups and we played again.
+                    </p>
+                    
+                    <div class="visual-block">
+                        <img src="assets/never-make-spark.png" alt="The moment of creation" loading="lazy">
+                        <span class="visual-block-caption">Fig 2. The spark. The idea becoming real.</span>
+                    </div>
+                    
+                    <p>
+                        No tutorials. No engine. No code. No compile errors. No "asset store" rabbit holes.
+                    </p>
+                    
+                    <p>
+                        Just the idea. Alive. Playable. In under 4 minutes.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Cinematic Break 2 -->
+        <section class="section" style="padding: 0;">
+            <div class="cinematic-break">
+                <div class="cinematic-break-bg" style="background-image: url('assets/never-make-connection.png');"></div>
+                <div class="cinematic-break-overlay"></div>
+                <div class="cinematic-break-content">
+                    <h2 class="cinematic-break-text">"We played three rounds.<br>He was in Portugal."</h2>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 5: The Psychology -->
+        <section class="section" id="section-5">
+            <div class="section-content">
+                <div class="text-block" data-reveal>
+                    <h2>Why You're Actually Scared</h2>
+                    
+                    <p>
+                        Here's the uncomfortable truth I discovered after that experiment:
+                    </p>
+                    
+                    <p>
+                        <strong>I had been using "learning" as a shield.</strong>
+                    </p>
+                    
+                    <p>
+                        As long as I was "learning game development," I never had to face the terror of actually shipping something. Never had to risk someone playing my creation and thinking it was stupid.
+                    </p>
+                    
+                    <p>
+                        The code, the engines, the tutorials — they weren't tools. They were <em>excuses</em>. Very sophisticated, very expensive excuses.
+                    </p>
+                    
+                    <div class="visual-block">
+                        <img src="assets/never-make-mirror.png" alt="Person looking at reflection" loading="lazy">
+                        <span class="visual-block-caption">Fig 3. The real obstacle was never the code.</span>
+                    </div>
+                    
+                    <p>
+                        When you can make a game in 4 minutes, you lose all your excuses. You're left with nothing but your creativity. And that's terrifying.
+                    </p>
+                    
+                    <p>
+                        But it's also the only way forward.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 6: The Path -->
+        <section class="section" id="section-6">
+            <div class="section-content">
+                <div class="text-block" data-reveal>
+                    <h2>The 5-Minute Rule</h2>
+                    
+                    <p>
+                        After that experiment, I made myself a rule: if I can't go from idea to playable in 5 minutes, I'm using the wrong tool.
+                    </p>
+                    
+                    <p>
+                        Think about that for a second.
+                    </p>
+                    
+                    <p>
+                        Writers don't spend 200 hours learning how paper works before writing a story. Musicians don't need a computer science degree to hum a melody. Why should game creators be any different?
+                    </p>
+                    
+                    <p>
+                        The gap between having an idea and seeing it come alive — that's where <a href="the-creative-block-is-a-lie.html">creative blocks come from</a>. Shrink that gap to nothing, and the blocks disappear.
+                    </p>
+                    
+                    <div class="quote-block">
+                        <p class="quote-text">"You don't get points for difficulty. You get points for shipping."</p>
+                        <p class="quote-author">— Someone smarter than me</p>
+                    </div>
+                    
+                    <p>
+                        Thomas, from earlier? I sent him the app. He shipped his first game three days later. A silly thing about a frog eating flies. He sent it to his sister. She played it. She laughed.
+                    </p>
+                    
+                    <p>
+                        Six years of theory. Three days to actually ship.
+                    </p>
+                    
+                    <p>
+                        <strong>The tools changed. He didn't have to.</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Cinematic Break 3 -->
+        <section class="section" style="padding: 0;">
+            <div class="cinematic-break">
+                <div class="cinematic-break-bg" style="background-image: url('assets/never-make-explosion.png');"></div>
+                <div class="cinematic-break-overlay"></div>
+                <div class="cinematic-break-content">
+                    <h2 class="cinematic-break-text">The barrier is gone.<br>The gate is open.</h2>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-title">Stop Planning.<br>Start Playing.</h2>
+                <p class="cta-subtitle">
+                    Your 48th project doesn't need to become your 48th graveyard.<br>
+                    Five minutes. One idea. Zero excuses.
+                </p>
+                
+                <a href="https://play.google.com/store/apps/details?id=com.nextap.vibebrews" target="_blank" rel="noopener" class="cta-button">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
+                    Make Your First Game
+                </a>
+                
+                <div class="cta-secondary-links">
+                    <a href="how-to-make-a-game-without-coding.html">How it works</a>
+                    <a href="our-vision.html">Our philosophy</a>
+                    <a href="i-have-a-game-idea.html">Already have an idea?</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Related Articles -->
+        <section class="related-section">
+            <h3 class="related-title">Keep Reading</h3>
+            <div class="related-grid">
+                <a href="the-death-of-coding.html" class="related-card">
+                    <h4 class="related-card-title">The Death of Coding</h4>
+                    <p class="related-card-desc">Why learning to code might be the biggest waste of time in 2026.</p>
+                </a>
+                <a href="why-i-stopped-learning-unity.html" class="related-card">
+                    <h4 class="related-card-title">Why I Stopped Learning Unity</h4>
+                    <p class="related-card-desc">500 hours. Zero shipped games. My confession.</p>
+                </a>
+                <a href="the-creative-block-is-a-lie.html" class="related-card">
+                    <h4 class="related-card-title">The Creative Block is a Lie</h4>
+                    <p class="related-card-desc">I built a multiplayer universe in 4 minutes. Stop making excuses.</p>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="how-to-make-a-game-without-coding.html">How to Make Games</a>
+                <a href="our-vision.html">Our Vision</a>
+                <a href="i-have-a-game-idea.html">I Have an Idea</a>
+                <a href="productive-things-to-do-on-phone.html">Productive Play</a>
+            </div>
+            <p class="footer-copy">
+                © 2026 VibeBrews. A product by <a href="https://www.linkedin.com/company/nextap-ai/" target="_blank" rel="noopener">Nextap AI</a>
+            </p>
+        </footer>
+        
+    </main>
+
+    <script>
+        // ==================== THREE.JS CINEMATIC SCENE ====================
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x030303, 0.008);
+        
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        document.getElementById('three-canvas').appendChild(renderer.domElement);
+        
+        // === CREATE FLOATING "DEAD PROJECT" DEBRIS ===
+        const debris = [];
+        const debrisGeometries = [
+            new THREE.BoxGeometry(1, 1, 1),
+            new THREE.BoxGeometry(2, 0.1, 1.5),
+            new THREE.BoxGeometry(0.5, 0.5, 0.5)
+        ];
+        
+        for (let i = 0; i < 150; i++) {
+            const geom = debrisGeometries[Math.floor(Math.random() * debrisGeometries.length)];
+            const material = new THREE.MeshBasicMaterial({
+                color: new THREE.Color().setHSL(Math.random() * 0.1 + 0.55, 0.3, 0.15), // Blueish gray
+                transparent: true,
+                opacity: 0.4,
+                wireframe: Math.random() > 0.5
+            });
+            
+            const mesh = new THREE.Mesh(geom, material);
+            mesh.position.x = (Math.random() - 0.5) * 120;
+            mesh.position.y = (Math.random() - 0.5) * 80;
+            mesh.position.z = (Math.random() - 0.5) * 120 - 20;
+            mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+            mesh.userData = {
+                rotSpeed: (Math.random() - 0.5) * 0.02,
+                floatSpeed: Math.random() * 0.5 + 0.5,
+                floatOffset: Math.random() * Math.PI * 2
+            };
+            
+            scene.add(mesh);
+            debris.push(mesh);
+        }
+        
+        // === CREATE VIBRANT PARTICLES (appear later) ===
+        const particleCount = 3000;
+        const particleGeometry = new THREE.BufferGeometry();
+        const particlePositions = new Float32Array(particleCount * 3);
+        const particleColors = new Float32Array(particleCount * 3);
+        
+        const vibrantColors = [
+            new THREE.Color(0x00F5FF), // Cyan
+            new THREE.Color(0xFF00E5), // Magenta
+            new THREE.Color(0xFF5C00), // Orange
+            new THREE.Color(0x8B5CF6), // Purple
+            new THREE.Color(0x10B981)  // Green
+        ];
+        
+        for (let i = 0; i < particleCount; i++) {
+            particlePositions[i * 3] = (Math.random() - 0.5) * 150;
+            particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 100;
+            particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 150;
+            
+            const color = vibrantColors[Math.floor(Math.random() * vibrantColors.length)];
+            particleColors[i * 3] = color.r;
+            particleColors[i * 3 + 1] = color.g;
+            particleColors[i * 3 + 2] = color.b;
+        }
+        
+        particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+        particleGeometry.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
+        
+        const particleMaterial = new THREE.PointsMaterial({
+            size: 0.15,
+            transparent: true,
+            opacity: 0,
+            vertexColors: true,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const particles = new THREE.Points(particleGeometry, particleMaterial);
+        scene.add(particles);
+        
+        // === LIGHTING ===
+        const ambientLight = new THREE.AmbientLight(0x111111);
+        scene.add(ambientLight);
+        
+        camera.position.z = 30;
+        camera.position.y = 5;
+        
+        // === SCROLL STATE ===
+        let scrollProgress = 0;
+        let targetCameraZ = 30;
+        let targetCameraRotY = 0;
+        let targetParticleOpacity = 0;
+        
+        // === ANIMATION LOOP ===
+        const clock = new THREE.Clock();
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            const elapsed = clock.getElapsedTime();
+            
+            // Smooth camera movement
+            camera.position.z += (targetCameraZ - camera.position.z) * 0.05;
+            camera.rotation.y += (targetCameraRotY - camera.rotation.y) * 0.05;
+            
+            // Particle opacity transition
+            particleMaterial.opacity += (targetParticleOpacity - particleMaterial.opacity) * 0.03;
+            
+            // Debris animation
+            debris.forEach((d, i) => {
+                d.rotation.x += d.userData.rotSpeed;
+                d.rotation.y += d.userData.rotSpeed * 0.7;
+                d.position.y += Math.sin(elapsed * d.userData.floatSpeed + d.userData.floatOffset) * 0.003;
+                
+                // Fade out debris as we progress
+                if (scrollProgress > 0.4) {
+                    d.material.opacity = Math.max(0, 0.4 - (scrollProgress - 0.4) * 1.5);
+                }
+            });
+            
+            // Particle rotation
+            particles.rotation.y = elapsed * 0.02;
+            particles.rotation.x = Math.sin(elapsed * 0.1) * 0.1;
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // === SCROLL HANDLER ===
+        function updateScroll() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            scrollProgress = Math.min(1, scrollTop / docHeight);
+            
+            // Update progress bar
+            document.getElementById('progressFill').style.width = (scrollProgress * 100) + '%';
+            
+            // Cinematic camera movement
+            targetCameraZ = 30 - (scrollProgress * 60); // Move camera forward
+            targetCameraRotY = scrollProgress * Math.PI * 0.15; // Slight rotation
+            
+            // Transition from debris to particles at ~50% scroll
+            if (scrollProgress > 0.5) {
+                targetParticleOpacity = Math.min(0.8, (scrollProgress - 0.5) * 3);
+            } else {
+                targetParticleOpacity = 0;
+            }
+            
+            // Color transition on scene
+            const bgColor = new THREE.Color().lerpColors(
+                new THREE.Color(0x030303),
+                new THREE.Color(0x050510),
+                scrollProgress
+            );
+            scene.fog.color = bgColor;
+        }
+        
+        window.addEventListener('scroll', updateScroll, { passive: true });
+        updateScroll();
+        
+        // === RESIZE HANDLER ===
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // ==================== SCROLL REVEAL ====================
+        const revealBlocks = document.querySelectorAll('[data-reveal]');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '-50px' });
+        
+        revealBlocks.forEach(block => revealObserver.observe(block));
+        
+        // ==================== MOBILE MENU ====================
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 968) {
+                if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+        
+        // Close sidebar on link click (mobile)
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 968) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

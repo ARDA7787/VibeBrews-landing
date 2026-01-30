@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 3AM Scroll: Why You Can't Stop (And What Finally Worked) | VibeBrews</title>
+    <meta name="description"
+        content="4 hours of scrolling. Nothing to show for it. That empty feeling at 3AM. I finally broke the cycle - here's exactly how, and why willpower isn't the answer.">
+    <meta name="keywords"
+        content="phone addiction, doom scrolling, screen time, cant stop scrolling, why do i scroll at night, phone addiction help, digital detox, mindless scrolling, tiktok addiction, instagram addiction, social media addiction, how to stop scrolling, productive phone use">
+    
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vibebrews.com/the-3am-scroll">
+    
+    <!-- Favicon -->
+    <link rel="icon" id="favicon" type="image/png" href="">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/logo-white-180x180.png">
+    <script>
+        (function() {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const size = 32, radius = 10;
+                canvas.width = size; canvas.height = size;
+                const ctx = canvas.getContext('2d');
+                ctx.beginPath();
+                ctx.moveTo(radius, 0); ctx.lineTo(size - radius, 0);
+                ctx.quadraticCurveTo(size, 0, size, radius);
+                ctx.lineTo(size, size - radius);
+                ctx.quadraticCurveTo(size, size, size - radius, size);
+                ctx.lineTo(radius, size);
+                ctx.quadraticCurveTo(0, size, 0, size - radius);
+                ctx.lineTo(0, radius);
+                ctx.quadraticCurveTo(0, 0, radius, 0);
+                ctx.closePath(); ctx.clip();
+                ctx.drawImage(img, 0, 0, size, size);
+                const favicon = document.getElementById('favicon');
+                if (favicon) favicon.href = canvas.toDataURL('image/png');
+            };
+            img.src = 'assets/logo-white-96x96.png';
+        })();
+    </script>
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://vibebrews.com/the-3am-scroll">
+    <meta property="og:title" content="The 3AM Scroll: Why You Can't Stop (And What Finally Worked)">
+    <meta property="og:description" content="4 hours of scrolling. Nothing to show for it. I finally broke the cycle.">
+    <meta property="og:image" content="https://vibebrews.com/assets/og-3am-scroll.jpg">
+    <meta property="og:site_name" content="VibeBrews">
+    <meta property="article:published_time" content="2026-01-26">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The 3AM Scroll: Why You Can't Stop">
+    <meta name="twitter:description" content="4 hours of scrolling. That empty feeling. I finally broke the cycle.">
+    <meta name="twitter:image" content="https://vibebrews.com/assets/og-3am-scroll.jpg">
+    
+    <!-- JSON-LD Article Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "The 3AM Scroll: Why You Can't Stop (And What Finally Worked)",
+        "description": "4 hours of scrolling. Nothing to show for it. That empty feeling at 3AM. I finally broke the cycle - here's exactly how.",
+        "image": "https://vibebrews.com/assets/og-3am-scroll.jpg",
+        "author": { "@type": "Person", "name": "Marcus Chen", "jobTitle": "Tech & Culture Writer" },
+        "publisher": { "@type": "Organization", "name": "VibeBrews", "logo": { "@type": "ImageObject", "url": "https://vibebrews.com/logo.png" } },
+        "datePublished": "2026-01-26",
+        "dateModified": "2026-01-26",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://vibebrews.com/the-3am-scroll"
+        }
+    }
+    </script>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'SF Pro Display';
+            src: local('SF Pro Display'), local('.SF NS Display'), local('Helvetica Neue');
+            font-weight: 100 900;
+            font-style: normal;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            --color-bg: #020206;
+            --color-surface: #080810;
+            --color-surface-elevated: #0c0c18;
+            --color-border: rgba(255, 255, 255, 0.06);
+            --color-text-primary: rgba(255, 255, 255, 0.95);
+            --color-text-secondary: rgba(255, 255, 255, 0.6);
+            --color-text-tertiary: rgba(255, 255, 255, 0.3);
+            
+            /* The palette: night blue + phone glow */
+            --color-glow-blue: #4169E1;
+            --color-glow-purple: #7B68EE;
+            --color-alert-red: #FF4757;
+            --color-hope-cyan: #00D4FF;
+            --color-create-gold: #FFD700;
+            --color-life-green: #00E676;
+            
+            --font-display: 'Space Grotesk', -apple-system, sans-serif;
+            --font-sans: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
+            --font-mono: 'SF Mono', SFMono-Regular, Consolas, monospace;
+            
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--color-text-secondary);
+            background: var(--color-bg);
+            overflow-x: hidden;
+        }
+        
+        ::selection {
+            background: var(--color-glow-purple);
+            color: #fff;
+        }
+        
+        /* ==================== THREE.JS CANVAS ==================== */
+        #three-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        /* ==================== SIDEBAR ==================== */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 260px;
+            background: rgba(2,2,6,0.92);
+            backdrop-filter: blur(24px);
+            border-right: 1px solid var(--color-border);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s var(--ease-out-expo);
+        }
+        
+        .sidebar-header {
+            padding: 20px 22px;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            text-decoration: none;
+        }
+        
+        .sidebar-logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+        
+        .sidebar-nav {
+            flex: 1;
+            padding: 16px 12px;
+            overflow-y: auto;
+        }
+        
+        .sidebar-section-title {
+            padding: 8px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            margin-bottom: 2px;
+        }
+        
+        .sidebar-link:hover {
+            background: rgba(255,255,255,0.05);
+            color: var(--color-text-primary);
+        }
+        
+        .sidebar-link.active {
+            background: rgba(65,105,225,0.15);
+            color: var(--color-hope-cyan);
+            font-weight: 500;
+        }
+        
+        .sidebar-link svg {
+            width: 18px;
+            height: 18px;
+            opacity: 0.5;
+        }
+        
+        .sidebar-link.active svg {
+            opacity: 1;
+        }
+        
+        .sidebar-footer {
+            padding: 20px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .sidebar-cta {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: #000;
+            background: linear-gradient(135deg, var(--color-hope-cyan), var(--color-glow-purple));
+            padding: 12px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        
+        .sidebar-cta:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+        
+        /* Mobile menu toggle */
+        .menu-toggle {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 1001;
+            width: 44px;
+            height: 44px;
+            background: rgba(2,2,6,0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--color-text-primary);
+        }
+        
+        .menu-toggle svg {
+            width: 22px;
+            height: 22px;
+        }
+        
+        /* ==================== MAIN CONTENT ==================== */
+        .main {
+            margin-left: 260px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* ==================== TIME INDICATOR ==================== */
+        .time-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-family: var(--font-mono);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--color-glow-blue);
+            opacity: 0.15;
+            z-index: 50;
+            text-shadow: 0 0 40px var(--color-glow-blue);
+            transition: all 0.5s ease;
+            pointer-events: none;
+        }
+        
+        /* ==================== SCROLL PROGRESS ==================== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 260px;
+            right: 0;
+            height: 2px;
+            background: rgba(255,255,255,0.05);
+            z-index: 999;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--color-alert-red), var(--color-glow-purple), var(--color-hope-cyan), var(--color-life-green));
+            transition: width 0.1s linear;
+        }
+        
+        /* ==================== SECTIONS ==================== */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 80px 48px;
+        }
+        
+        .section-content {
+            max-width: 720px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* ==================== HERO SECTION ==================== */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 40px;
+            position: relative;
+        }
+        
+        .hero-phone-glow {
+            position: absolute;
+            width: 300px;
+            height: 600px;
+            background: radial-gradient(ellipse at center, var(--color-glow-blue), transparent 70%);
+            opacity: 0.1;
+            filter: blur(60px);
+            animation: phoneGlow 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes phoneGlow {
+            0%, 100% { opacity: 0.08; transform: scale(1); }
+            50% { opacity: 0.15; transform: scale(1.1); }
+        }
+        
+        .hero-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--color-alert-red);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out-expo) 0.3s forwards;
+        }
+        
+        .hero-time {
+            font-family: var(--font-mono);
+            font-size: clamp(80px, 15vw, 160px);
+            font-weight: 700;
+            color: var(--color-glow-blue);
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            margin-bottom: 24px;
+            text-shadow: 0 0 80px var(--color-glow-blue);
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out-expo) 0.5s forwards;
+        }
+        
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 6vw, 56px);
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 28px;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out-expo) 0.7s forwards;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(18px, 2.5vw, 22px);
+            color: var(--color-text-secondary);
+            max-width: 550px;
+            margin: 0 auto 48px;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out-expo) 0.9s forwards;
+        }
+        
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out-expo) 1.1s forwards;
+        }
+        
+        .hero-meta-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hero-meta-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-glow-blue), var(--color-glow-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: #fff;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-text-tertiary);
+            font-size: 12px;
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+        
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ==================== TEXT BLOCKS ==================== */
+        .text-block {
+            background: rgba(8, 8, 16, 0.92);
+            backdrop-filter: blur(24px);
+            padding: 48px;
+            border-radius: 24px;
+            border: 1px solid var(--color-border);
+            box-shadow: 
+                0 40px 80px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.03);
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s var(--ease-out-expo);
+        }
+        
+        .text-block.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .text-block h2 {
+            font-family: var(--font-display);
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+        }
+        
+        .text-block h3 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin: 40px 0 16px;
+        }
+        
+        .text-block p {
+            margin-bottom: 24px;
+        }
+        
+        .text-block p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .text-block strong {
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+        
+        .text-block em {
+            color: var(--color-hope-cyan);
+            font-style: normal;
+        }
+        
+        .text-block a {
+            color: var(--color-hope-cyan);
+            text-decoration: underline;
+            text-decoration-color: rgba(0, 212, 255, 0.3);
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.2s ease;
+        }
+        
+        .text-block a:hover {
+            text-decoration-color: var(--color-hope-cyan);
+        }
+        
+        /* ==================== VISUAL BLOCKS ==================== */
+        .visual-block {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 32px 0;
+            position: relative;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            aspect-ratio: 16/10;
+            background: var(--color-surface);
+        }
+        
+        .visual-block img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .visual-block-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 24px;
+            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            font-family: var(--font-mono);
+        }
+        
+        /* ==================== STAT CALLOUT ==================== */
+        .stat-callout {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(255,71,87,0.1), rgba(123,104,238,0.05));
+            border: 1px solid rgba(255,71,87,0.2);
+            border-radius: 16px;
+            margin: 32px 0;
+        }
+        
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 56px;
+            font-weight: 700;
+            color: var(--color-alert-red);
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(255,71,87,0.5);
+        }
+        
+        .stat-text {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+        }
+        
+        .stat-text strong {
+            color: var(--color-text-primary);
+            display: block;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+        
+        /* ==================== QUOTE BLOCK ==================== */
+        .quote-block {
+            padding: 40px;
+            border-left: 4px solid var(--color-glow-purple);
+            background: linear-gradient(135deg, rgba(123,104,238,0.08), rgba(65,105,225,0.04));
+            border-radius: 0 20px 20px 0;
+            margin: 40px 0;
+        }
+        
+        .quote-text {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+        
+        .quote-author {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+        }
+        
+        /* ==================== COMPARISON TIMELINE ==================== */
+        .timeline-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 40px 0;
+        }
+        
+        .timeline-side {
+            padding: 28px;
+            border-radius: 20px;
+            border: 1px solid var(--color-border);
+        }
+        
+        .timeline-side.before {
+            background: linear-gradient(135deg, rgba(255,71,87,0.06), transparent);
+            border-color: rgba(255,71,87,0.15);
+        }
+        
+        .timeline-side.after {
+            background: linear-gradient(135deg, rgba(0,230,118,0.06), transparent);
+            border-color: rgba(0,230,118,0.15);
+        }
+        
+        .timeline-side h4 {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 20px;
+        }
+        
+        .timeline-side.before h4 {
+            color: var(--color-alert-red);
+        }
+        
+        .timeline-side.after h4 {
+            color: var(--color-life-green);
+        }
+        
+        .timeline-side ul {
+            list-style: none;
+        }
+        
+        .timeline-side li {
+            padding: 10px 0;
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .timeline-side li:last-child {
+            border-bottom: none;
+        }
+        
+        .timeline-side li span {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            flex-shrink: 0;
+            width: 50px;
+        }
+        
+        /* ==================== CINEMATIC BREAK ==================== */
+        .cinematic-break {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            min-height: 500px;
+            overflow: hidden;
+            margin: 0 -48px;
+            width: calc(100% + 96px);
+        }
+        
+        .cinematic-break-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: saturate(1.2) contrast(1.1);
+        }
+        
+        .cinematic-break-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, 
+                rgba(2,2,6,1) 0%,
+                rgba(2,2,6,0.4) 30%,
+                rgba(2,2,6,0.4) 70%,
+                rgba(2,2,6,1) 100%
+            );
+        }
+        
+        .cinematic-break-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .cinematic-break-text {
+            font-family: var(--font-display);
+            font-size: clamp(28px, 5vw, 56px);
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 4px 40px rgba(0,0,0,0.8);
+            max-width: 700px;
+            line-height: 1.2;
+        }
+        
+        /* ==================== INSIGHT BOX ==================== */
+        .insight-box {
+            background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(123,104,238,0.04));
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 32px 0;
+        }
+        
+        .insight-box-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--color-hope-cyan);
+            margin-bottom: 12px;
+        }
+        
+        .insight-box p {
+            margin: 0;
+            color: var(--color-text-primary);
+            font-size: 17px;
+        }
+        
+        /* ==================== CTA SECTION ==================== */
+        .cta-section {
+            padding: 120px 48px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, var(--color-border));
+        }
+        
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+        
+        .cta-subtitle {
+            font-size: 19px;
+            color: var(--color-text-secondary);
+            margin-bottom: 40px;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, var(--color-hope-cyan), var(--color-glow-purple));
+            color: #000;
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.3s var(--ease-out-expo);
+            box-shadow: 0 20px 60px rgba(0,212,255,0.25);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(123,104,238,0.35);
+        }
+        
+        .cta-button svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .cta-note {
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+        }
+        
+        .cta-secondary-links {
+            margin-top: 32px;
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            font-size: 14px;
+            flex-wrap: wrap;
+        }
+        
+        .cta-secondary-links a {
+            color: var(--color-text-tertiary);
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .cta-secondary-links a:hover {
+            color: var(--color-text-primary);
+            text-decoration-color: var(--color-text-primary);
+        }
+        
+        /* ==================== RELATED ARTICLES ==================== */
+        .related-section {
+            padding: 80px 48px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .related-title {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-text-tertiary);
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .related-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 28px;
+            text-decoration: none;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+        
+        .related-card:hover {
+            background: var(--color-surface-elevated);
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.12);
+        }
+        
+        .related-card-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .related-card-desc {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+        }
+        
+        /* ==================== FOOTER ==================== */
+        .footer {
+            padding: 48px 40px;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-text-secondary);
+        }
+        
+        .footer-copy {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+        }
+        
+        .footer-copy a {
+            color: inherit;
+            text-decoration: underline;
+        }
+        
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 968px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .main {
+                margin-left: 0;
+            }
+            
+            .progress-bar {
+                left: 0;
+            }
+            
+            .section {
+                padding: 60px 24px;
+            }
+            
+            .text-block {
+                padding: 32px 24px;
+            }
+            
+            .timeline-compare {
+                grid-template-columns: 1fr;
+            }
+            
+            .cinematic-break {
+                margin: 0 -24px;
+                width: calc(100% + 48px);
+            }
+            
+            .time-indicator {
+                font-size: 32px;
+                top: 70px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-time {
+                font-size: 64px;
+            }
+            
+            .hero-title {
+                font-size: 28px;
+            }
+            
+            .text-block h2 {
+                font-size: 26px;
+            }
+            
+            .stat-callout {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .quote-text {
+                font-size: 20px;
+            }
+        }
+        
+        /* ==================== NOTIFICATION EFFECT ==================== */
+        .notification-ping {
+            position: fixed;
+            top: 80px;
+            right: 80px;
+            width: 12px;
+            height: 12px;
+            background: var(--color-alert-red);
+            border-radius: 50%;
+            opacity: 0;
+            z-index: 100;
+            pointer-events: none;
+        }
+        
+        .notification-ping.active {
+            animation: ping 1s var(--ease-out-expo);
+        }
+        
+        @keyframes ping {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(3); }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Three.js Canvas -->
+    <div id="three-canvas"></div>
+    
+    <!-- Time Indicator -->
+    <div class="time-indicator" id="timeIndicator">3:17</div>
+    
+    <!-- Notification Ping -->
+    <div class="notification-ping" id="notificationPing"></div>
+    
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+    </button>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <img src="assets/logo-white-48x48.png" alt="VibeBrews">
+                <span>VibeBrews</span>
+            </a>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="sidebar-section-title">Pages</div>
+            <a href="index.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                </svg>
+                Home
+            </a>
+            <a href="how-to-make-a-game-without-coding.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+                How to Make Games
+            </a>
+            <a href="i-have-a-game-idea.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+                I Have an Idea
+            </a>
+            <a href="our-vision.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+                Our Vision
+            </a>
+            <a href="productive-things-to-do-on-phone.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                </svg>
+                Productive Play
+            </a>
+            <a href="the-creative-block-is-a-lie.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                The Creative Lie
+            </a>
+            <a href="the-game-you-will-never-make.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+                </svg>
+                The Game You'll Never Make
+            </a>
+            <a href="the-3am-scroll.html" class="sidebar-link active">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                </svg>
+                The 3AM Scroll
+            </a>
+            <a href="why-your-ideas-die-in-your-notes-app.html" class="sidebar-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Why Ideas Die
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="https://play.google.com/store/apps/details?id=com.nextap.vibebrews" target="_blank" rel="noopener" class="sidebar-cta">Try Something Different</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+        
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <div class="hero-phone-glow"></div>
+            <span class="hero-eyebrow">Personal / Jan 26, 2026</span>
+            <div class="hero-time">3:17</div>
+            <h1 class="hero-title">
+                Why You Can't Stop.<br>
+                (And What Finally Worked)
+            </h1>
+            <p class="hero-subtitle">
+                4 hours gone. Nothing to show for it. That hollow feeling in your chest.<br>
+                I lived this every night. Until I didn't.
+            </p>
+            <div class="hero-meta">
+                <div class="hero-meta-author">
+                    <div class="hero-meta-avatar">MC</div>
+                    <span>Marcus Chen</span>
+                </div>
+                <span>•</span>
+                <span>9 min read</span>
+            </div>
+            
+            <div class="scroll-indicator">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                </svg>
+                <span>Scroll</span>
+            </div>
+        </section>
+        
+        <!-- Section 1: The Hook -->
+        <section class="section" id="section-1">
+            <div class="section-content">
+                <div class="text-block" data-reveal>
+                    <h2>I Know This Feeling</h2>
+                    
+                    <p>
+                        It's 3AM. You said you'd go to bed hours ago. But you're still here, thumb moving on autopilot, heart rate slightly elevated from nothing in particular.
+                    </p>
+                    
+                    <p>
+                        Scroll. Someone's holiday photos. Scroll. A recipe you'll never make. Scroll. Drama about people you don't know. Scroll. A reel that's mildly amusing. Scroll. Repeat.
+                    </p>
+                    
+                    <p>
+                        <strong>Then you lock your phone.</strong>
+                    </p>
+                    
+                    <p>
+                        And there it is. That hollow feeling. Like you've eaten fast food for the soul. Technically full, deeply unsatisfied.
+                    </p>
+                    
+                    <p>
+                        I know because I lived this for three years. Brisbane to Sydney for work, hotel rooms every week, and that glowing rectangle my only companion at 3AM.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 2: The Science -->
+        <section class="section" id="section-2">
+            <div class="section-content">
+                <div class="text-block" data-reveal>
+                    <h2>Your Brain Isn't Broken. It's Hijacked.</h2>
+                    
+                    <p>
+                        Let's be honest about what's happening. Every app on your phone has a team of PhDs whose entire job is to keep you scrolling. They've studied slot machines, they've mapped your dopamine pathways, and they've optimised every pixel for addiction.
+                    </p>
+                    
+                    <div class="stat-callout">
+                        <div class="stat-number">2,617</div>
+                        <div class="stat-text">
+                            <strong>Average daily phone touches</strong>
+                            That's once every 33 seconds of waking life. You're not weak. You're outgunned.
+                        </div>
+                    </div>
+                    
+                    <p>
+                        The feeds are designed for one thing: <em>consumption without completion</em>. There's no end. No satisfaction point. Just an infinite scroll into the void.
+                    </p>
+                    
+                    <div class="visual-block">
+                        <img src="assets/3am-dopamine-cycle.png" alt="The dopamine consumption loop" loading="lazy">
+                        <span class="visual-block-caption">Fig 1. The consumption loop. Notice there's no exit.</span>
+                    </div>
+                    
+                    <p>
+                        That's the trick. Passive consumption gives you tiny hits of dopamine — just enough to keep you scrolling, never enough to feel complete. It's the <a href="the-creative-block-is-a-lie.html">opposite of creation</a>.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Cinematic Break 1 -->
+        <section class="section" style="padding: 0;">
+            <div class="cinematic-break">
+                <div class="cinematic-break-bg" style="background-image: url('assets/3am-void-scroll.png');"></div>
+                <div class="cinematic-break-overlay"></div>
+                <div class="cinematic-break-content">
+                    <h2 class="cinematic-break-text">"I was consuming 4 hours a night.<br>I had nothing to show for any of it."</h2>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 3: The Moment -->
+        <section class="section" id="section-3">
+            <div class="section-content">
+                <div class="text-block" data-reveal>
+                    <h2>The Night Everything Changed</h2>
+                    
+                    <p>
+                        July 2025. Another hotel. Another 3AM. I'd just spent two hours watching strangers argue about things I'd forget by morning.
+                    </p>
+                    
+                    <p>
+                        I put my phone down and stared at the ceiling. And I asked myself a question that hit harder than I expected:
+                    </p>
+                    
+                    <div class="quote-block">
+                        <p class="quote-text">"What if I spent those 2 hours making something instead of watching something?"</p>
+                        <p class="quote-author">— Me, to the hotel ceiling</p>
+                    </div>
+                    
+                    <p>
+                        The next night, I tried it. I found this app that lets you describe an idea and it... builds it. I was skeptical. But I typed something stupid: <em>"A game where you're a drop of water trying to reach the ocean before you evaporate."</em>
+                    </p>
+                    
+                    <p>
+                        Four minutes later, I was playing it. On my phone. In a Brisbane hotel room.
+                    </p>
+                    
+                    <p>
+                        <strong>I'd made something.</strong>
+                    </p>
+                    
+                    <p>
+                        And here's the thing that surprised me: I wasn't tired anymore. I wasn't hollow. I was... energised? At 3AM?
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 4: The Discovery -->
+        <section class="section" id="section-4">
+            <div class="section-content">
+                <div class="text-block" data-reveal>
+                    <h2>Creation vs Consumption: The Dopamine Difference</h2>
+                    
+                    <p>
+                        I started digging into why this felt so different. Turns out, neuroscience has an answer.
+                    </p>
+                    
+                    <p>
+                        <strong>Passive consumption</strong> (scrolling, watching) triggers small, fleeting dopamine hits. Like empty calories. You keep chasing, never satisfied.
+                    </p>
+                    
+                    <p>
+                        <strong>Active creation</strong> triggers something different: a sense of completion, accomplishment, meaning. It's the same reason cooking a meal feels different from ordering takeaway. Even if the takeaway is "better."
+                    </p>
+                    
+                    <div class="visual-block">
+                        <img src="assets/3am-creation-vs-consumption.png" alt="Brain activity: creation vs consumption" loading="lazy">
+                        <span class="visual-block-caption">Fig 2. Same time investment. Completely different outcome.</span>
+                    </div>
+                    
+                    <div class="insight-box">
+                        <div class="insight-box-label">Key Insight</div>
+                        <p>The cure for mindless consumption isn't willpower. It's replacement. Your brain craves stimulation — give it stimulation that leaves you feeling full, not hollow.</p>
+                    </div>
+                    
+                    <p>
+                        I wasn't addicted to my phone. I was addicted to stimulation. The phone was just the delivery mechanism. And what I discovered was: creation scratches the same itch, but leaves you satisfied instead of empty.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Cinematic Break 2 -->
+        <section class="section" style="padding: 0;">
+            <div class="cinematic-break">
+                <div class="cinematic-break-bg" style="background-image: url('assets/3am-spark-creation.png');"></div>
+                <div class="cinematic-break-overlay"></div>
+                <div class="cinematic-break-content">
+                    <h2 class="cinematic-break-text">"I wasn't tired anymore.<br>I was energised. At 3AM."</h2>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 5: The Transformation -->
+        <section class="section" id="section-5">
+            <div class="section-content">
+                <div class="text-block" data-reveal>
+                    <h2>7 Days Later</h2>
+                    
+                    <p>
+                        I gave myself a challenge: one week. Every time I felt the urge to scroll, I'd open a creation app instead. Didn't matter what. Write a sentence. Sketch something. Make a weird little game about my commute.
+                    </p>
+                    
+                    <p>
+                        Here's what my nights looked like:
+                    </p>
+                    
+                    <div class="timeline-compare">
+                        <div class="timeline-side before">
+                            <h4>Before</h4>
+                            <ul>
+                                <li><span>11PM</span> "Just 5 minutes of TikTok"</li>
+                                <li><span>12AM</span> Still scrolling</li>
+                                <li><span>1AM</span> Why am I watching this?</li>
+                                <li><span>2AM</span> I should sleep...</li>
+                                <li><span>3AM</span> *finally puts phone down*</li>
+                                <li><span>3:05</span> Hollow. Can't sleep.</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-side after">
+                            <h4>After</h4>
+                            <ul>
+                                <li><span>11PM</span> Opened creation app</li>
+                                <li><span>11:20</span> Made something weird</li>
+                                <li><span>11:45</span> Shared it. Someone played it.</li>
+                                <li><span>12AM</span> Satisfied. Put phone down.</li>
+                                <li><span>12:05</span> Asleep.</li>
+                                <li><span></span> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <p>
+                        By day 7, I wasn't fighting myself anymore. The urge to scroll was still there — I'm not a monk. But I'd rewired the habit. The path from boredom led somewhere different now.
+                    </p>
+                    
+                    <p>
+                        And here's the weird part: <strong>my screen time didn't decrease much</strong>. But the quality of that time transformed completely.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 6: The Framework -->
+        <section class="section" id="section-6">
+            <div class="section-content">
+                <div class="text-block" data-reveal>
+                    <h2>What Actually Works (Not Willpower)</h2>
+                    
+                    <p>
+                        "Just use your phone less" is terrible advice. It's like telling someone to "just eat less" without changing what's in their fridge.
+                    </p>
+                    
+                    <p>
+                        Here's what actually worked for me:
+                    </p>
+                    
+                    <h3>1. Replace, Don't Remove</h3>
+                    <p>
+                        Don't delete apps and white-knuckle it. Replace the habit loop. Bored → create something, not bored → scroll nothing. Same trigger, different response.
+                    </p>
+                    
+                    <h3>2. Make Creation Stupid Easy</h3>
+                    <p>
+                        If creating requires opening a laptop, learning software, or thinking hard — you'll scroll instead. The creation app needs to be easier than opening Instagram. I found one where I literally just type what I want to make and it appears. <a href="productive-things-to-do-on-phone.html">That's the bar</a>.
+                    </p>
+                    
+                    <h3>3. Share What You Make</h3>
+                    <p>
+                        This sounds small, but it's massive. Sending your creation to one person — a friend, a stranger online — completes the satisfaction loop. You made something. Someone experienced it. Done.
+                    </p>
+                    
+                    <div class="visual-block">
+                        <img src="assets/3am-rewire-loop.png" alt="The creation satisfaction loop" loading="lazy">
+                        <span class="visual-block-caption">Fig 3. The same trigger. A different path. A complete loop.</span>
+                    </div>
+                    
+                    <p>
+                        The goal isn't to become a "creator" or build an audience or any of that nonsense. The goal is to feel complete when you put your phone down instead of hollow.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Cinematic Break 3 -->
+        <section class="section" style="padding: 0;">
+            <div class="cinematic-break">
+                <div class="cinematic-break-bg" style="background-image: url('assets/3am-morning-light.png');"></div>
+                <div class="cinematic-break-overlay"></div>
+                <div class="cinematic-break-content">
+                    <h2 class="cinematic-break-text">"Same phone. Same hours.<br>Completely different feeling."</h2>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 7: Closing -->
+        <section class="section" id="section-7">
+            <div class="section-content">
+                <div class="text-block" data-reveal>
+                    <h2>It's Not About the Phone</h2>
+                    
+                    <p>
+                        I'm not going to pretend I never scroll anymore. I do. We all do. The algorithms are too good, and we're only human.
+                    </p>
+                    
+                    <p>
+                        But I've broken the 3AM spiral. I sleep better. I wake up without that low-grade shame of wasted hours. And somewhere in a feed of games I've made — dumb ones, weird ones, ones I shared with strangers around the world — there's evidence that I <em>did</em> something with those hours.
+                    </p>
+                    
+                    <p>
+                        That's the difference. <strong>Consumption leaves no trace. Creation leaves something behind.</strong>
+                    </p>
+                    
+                    <p>
+                        Your brain wants stimulation. Your soul wants meaning. The trick is finding something that gives you both.
+                    </p>
+                    
+                    <p>
+                        For me, it was making things on my phone. Tiny things. Silly things. Games that took 5 minutes to create and 5 minutes to play with a stranger on the other side of the planet.
+                    </p>
+                    
+                    <p>
+                        Your path might be different. But I promise you: the 3AM scroll isn't inevitable. <a href="our-vision.html">There's another way</a>.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-title">Same Phone.<br>Different Feeling.</h2>
+                <p class="cta-subtitle">
+                    Five minutes to create something instead of consume something.<br>
+                    See what happens to 3AM.
+                </p>
+                
+                <a href="https://play.google.com/store/apps/details?id=com.nextap.vibebrews" target="_blank" rel="noopener" class="cta-button">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
+                    Try Creating Instead
+                </a>
+                
+                <p class="cta-note">(Takes 30 seconds. No account required to start.)</p>
+                
+                <div class="cta-secondary-links">
+                    <a href="the-creative-block-is-a-lie.html">More on creation vs consumption</a>
+                    <a href="productive-things-to-do-on-phone.html">Productive phone use</a>
+                    <a href="i-have-a-game-idea.html">Have an idea already?</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Related Articles -->
+        <section class="related-section">
+            <h3 class="related-title">Keep Reading</h3>
+            <div class="related-grid">
+                <a href="the-creative-block-is-a-lie.html" class="related-card">
+                    <h4 class="related-card-title">The Creative Block is a Lie</h4>
+                    <p class="related-card-desc">I built a multiplayer universe in 4 minutes. Stop making excuses.</p>
+                </a>
+                <a href="productive-things-to-do-on-phone.html" class="related-card">
+                    <h4 class="related-card-title">Productive Things to Do on Your Phone</h4>
+                    <p class="related-card-desc">Your phone isn't the enemy. How you use it is.</p>
+                </a>
+                <a href="the-game-you-will-never-make.html" class="related-card">
+                    <h4 class="related-card-title">The Game You'll Never Make</h4>
+                    <p class="related-card-desc">47 unfinished projects. 3AM promises. Sound familiar?</p>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="how-to-make-a-game-without-coding.html">How to Make Games</a>
+                <a href="our-vision.html">Our Vision</a>
+                <a href="i-have-a-game-idea.html">I Have an Idea</a>
+                <a href="productive-things-to-do-on-phone.html">Productive Play</a>
+            </div>
+            <p class="footer-copy">
+                © 2026 VibeBrews. A product by <a href="https://www.linkedin.com/company/nextap-ai/" target="_blank" rel="noopener">Nextap AI</a>
+            </p>
+        </footer>
+        
+    </main>
+
+    <script>
+        // ==================== THREE.JS CINEMATIC SCENE ====================
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x020206, 0.006);
+        
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        document.getElementById('three-canvas').appendChild(renderer.domElement);
+        
+        // === FLOATING NOTIFICATION RECTANGLES (Social media cards) ===
+        const cards = [];
+        const cardGeometry = new THREE.PlaneGeometry(2, 3);
+        
+        for (let i = 0; i < 80; i++) {
+            const material = new THREE.MeshBasicMaterial({
+                color: new THREE.Color().setHSL(0.6 + Math.random() * 0.15, 0.4, 0.12),
+                transparent: true,
+                opacity: 0.2 + Math.random() * 0.1,
+                side: THREE.DoubleSide
+            });
+            
+            const card = new THREE.Mesh(cardGeometry, material);
+            card.position.x = (Math.random() - 0.5) * 100;
+            card.position.y = (Math.random() - 0.5) * 80;
+            card.position.z = (Math.random() - 0.5) * 100 - 30;
+            card.rotation.set(Math.random() * 0.5, Math.random() * Math.PI, 0);
+            
+            card.userData = {
+                floatSpeed: Math.random() * 0.3 + 0.1,
+                floatOffset: Math.random() * Math.PI * 2,
+                originalOpacity: material.opacity
+            };
+            
+            scene.add(card);
+            cards.push(card);
+        }
+        
+        // === GLOWING PHONE SCREEN (Central focal point) ===
+        const phoneGeometry = new THREE.PlaneGeometry(3, 5.5);
+        const phoneMaterial = new THREE.MeshBasicMaterial({
+            color: 0x4169E1,
+            transparent: true,
+            opacity: 0.15
+        });
+        const phoneMesh = new THREE.Mesh(phoneGeometry, phoneMaterial);
+        phoneMesh.position.z = -5;
+        scene.add(phoneMesh);
+        
+        // === PARTICLE FIELD (Stars/dots of light) ===
+        const particleCount = 2000;
+        const particleGeometry = new THREE.BufferGeometry();
+        const particlePositions = new Float32Array(particleCount * 3);
+        const particleColors = new Float32Array(particleCount * 3);
+        
+        for (let i = 0; i < particleCount; i++) {
+            particlePositions[i * 3] = (Math.random() - 0.5) * 200;
+            particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 150;
+            particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 200;
+            
+            // Blue-purple spectrum
+            const hue = 0.6 + Math.random() * 0.15;
+            const color = new THREE.Color().setHSL(hue, 0.6, 0.5);
+            particleColors[i * 3] = color.r;
+            particleColors[i * 3 + 1] = color.g;
+            particleColors[i * 3 + 2] = color.b;
+        }
+        
+        particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+        particleGeometry.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
+        
+        const particleMaterial = new THREE.PointsMaterial({
+            size: 0.08,
+            transparent: true,
+            opacity: 0.6,
+            vertexColors: true,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const particles = new THREE.Points(particleGeometry, particleMaterial);
+        scene.add(particles);
+        
+        // === CREATION SPARKS (Appear later in scroll) ===
+        const sparkCount = 500;
+        const sparkGeometry = new THREE.BufferGeometry();
+        const sparkPositions = new Float32Array(sparkCount * 3);
+        
+        for (let i = 0; i < sparkCount; i++) {
+            sparkPositions[i * 3] = (Math.random() - 0.5) * 80;
+            sparkPositions[i * 3 + 1] = (Math.random() - 0.5) * 60;
+            sparkPositions[i * 3 + 2] = (Math.random() - 0.5) * 80;
+        }
+        
+        sparkGeometry.setAttribute('position', new THREE.BufferAttribute(sparkPositions, 3));
+        
+        const sparkMaterial = new THREE.PointsMaterial({
+            size: 0.2,
+            color: 0x00D4FF,
+            transparent: true,
+            opacity: 0,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const sparks = new THREE.Points(sparkGeometry, sparkMaterial);
+        scene.add(sparks);
+        
+        // === AMBIENT LIGHTING ===
+        const ambientLight = new THREE.AmbientLight(0x0a0a20);
+        scene.add(ambientLight);
+        
+        camera.position.z = 25;
+        camera.position.y = 0;
+        
+        // === SCROLL STATE ===
+        let scrollProgress = 0;
+        let targetCameraZ = 25;
+        let targetCameraY = 0;
+        let targetPhoneOpacity = 0.15;
+        let targetSparkOpacity = 0;
+        let scenePhase = 0; // 0 = consumption, 1 = transition, 2 = creation
+        
+        // === TIME INDICATOR ===
+        const timeIndicator = document.getElementById('timeIndicator');
+        const times = ['3:17', '3:24', '3:38', '3:52', '4:11', '12:05', '7:30'];
+        
+        // === ANIMATION LOOP ===
+        const clock = new THREE.Clock();
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            const elapsed = clock.getElapsedTime();
+            
+            // Smooth camera movement
+            camera.position.z += (targetCameraZ - camera.position.z) * 0.04;
+            camera.position.y += (targetCameraY - camera.position.y) * 0.04;
+            
+            // Phone glow pulse
+            phoneMesh.material.opacity += (targetPhoneOpacity - phoneMesh.material.opacity) * 0.05;
+            const phonePulse = Math.sin(elapsed * 2) * 0.05;
+            phoneMesh.material.opacity += phonePulse;
+            
+            // Spark opacity (creation phase)
+            sparkMaterial.opacity += (targetSparkOpacity - sparkMaterial.opacity) * 0.03;
+            
+            // Card animation (scrolling effect)
+            cards.forEach((card, i) => {
+                // Gentle floating
+                card.position.y += Math.sin(elapsed * card.userData.floatSpeed + card.userData.floatOffset) * 0.002;
+                
+                // Scroll downward effect (simulating feed scroll)
+                if (scenePhase === 0) {
+                    card.position.y -= 0.01;
+                    if (card.position.y < -50) card.position.y = 50;
+                }
+                
+                // Fade out during transition
+                if (scrollProgress > 0.4 && scrollProgress < 0.7) {
+                    card.material.opacity = card.userData.originalOpacity * (1 - (scrollProgress - 0.4) * 3);
+                }
+            });
+            
+            // Particle rotation
+            particles.rotation.y = elapsed * 0.01;
+            sparks.rotation.y = -elapsed * 0.02;
+            sparks.rotation.x = Math.sin(elapsed * 0.5) * 0.1;
+            
+            // Phone color transition
+            if (scenePhase === 2) {
+                phoneMaterial.color.lerp(new THREE.Color(0x00D4FF), 0.01);
+            }
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // === SCROLL HANDLER ===
+        function updateScroll() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            scrollProgress = Math.min(1, scrollTop / docHeight);
+            
+            // Update progress bar
+            document.getElementById('progressFill').style.width = (scrollProgress * 100) + '%';
+            
+            // Phase determination
+            if (scrollProgress < 0.35) {
+                scenePhase = 0; // Consumption
+            } else if (scrollProgress < 0.6) {
+                scenePhase = 1; // Transition
+            } else {
+                scenePhase = 2; // Creation
+            }
+            
+            // Cinematic camera movement
+            targetCameraZ = 25 - (scrollProgress * 35);
+            targetCameraY = scrollProgress * 5;
+            camera.rotation.x = scrollProgress * 0.1;
+            
+            // Time indicator update
+            const timeIndex = Math.min(times.length - 1, Math.floor(scrollProgress * times.length));
+            timeIndicator.textContent = times[timeIndex];
+            
+            // Time color transition
+            if (scrollProgress > 0.6) {
+                timeIndicator.style.color = '#00D4FF';
+                timeIndicator.style.textShadow = '0 0 40px #00D4FF';
+            } else {
+                timeIndicator.style.color = '#4169E1';
+                timeIndicator.style.textShadow = '0 0 40px #4169E1';
+            }
+            
+            // Phone opacity change
+            if (scrollProgress > 0.5) {
+                targetPhoneOpacity = 0.3;
+            } else {
+                targetPhoneOpacity = 0.15;
+            }
+            
+            // Sparks appear in creation phase
+            if (scrollProgress > 0.6) {
+                targetSparkOpacity = Math.min(0.7, (scrollProgress - 0.6) * 2.5);
+            } else {
+                targetSparkOpacity = 0;
+            }
+            
+            // Fog color transition
+            if (scrollProgress > 0.5) {
+                const t = (scrollProgress - 0.5) * 2;
+                const fogColor = new THREE.Color().lerpColors(
+                    new THREE.Color(0x020206),
+                    new THREE.Color(0x020210),
+                    t
+                );
+                scene.fog.color = fogColor;
+            }
+        }
+        
+        window.addEventListener('scroll', updateScroll, { passive: true });
+        updateScroll();
+        
+        // === RESIZE HANDLER ===
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // ==================== SCROLL REVEAL ====================
+        const revealBlocks = document.querySelectorAll('[data-reveal]');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '-50px' });
+        
+        revealBlocks.forEach(block => revealObserver.observe(block));
+        
+        // ==================== RANDOM NOTIFICATION PINGS ====================
+        const notificationPing = document.getElementById('notificationPing');
+        
+        function triggerPing() {
+            if (scrollProgress < 0.4 && Math.random() > 0.7) {
+                notificationPing.classList.add('active');
+                setTimeout(() => notificationPing.classList.remove('active'), 1000);
+            }
+            setTimeout(triggerPing, 2000 + Math.random() * 4000);
+        }
+        setTimeout(triggerPing, 3000);
+        
+        // ==================== MOBILE MENU ====================
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 968) {
+                if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+        
+        // Close sidebar on link click (mobile)
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 968) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
