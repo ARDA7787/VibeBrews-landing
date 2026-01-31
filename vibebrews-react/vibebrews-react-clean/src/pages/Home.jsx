@@ -1,20 +1,25 @@
 import { useState, useEffect, useRef } from 'react'
-import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import { motion, useScroll, useTransform, useInView, useReducedMotion } from 'framer-motion'
 import PageTransition from '../components/PageTransition'
 import ExternalLink from '../components/ExternalLink'
 import { Link } from 'react-router-dom'
+import ContinuousImage from '../components/ContinuousImage'
+import ContinuousButton from '../components/ContinuousButton'
+import ContinuousCard from '../components/ContinuousCard'
+import ContinuousInput from '../components/ContinuousInput'
 
-// Reveal animation wrapper
+// Reveal animation wrapper with reduced motion support
 const Reveal = ({ children, delay = 0, className = '' }) => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-50px' })
+  const prefersReducedMotion = useReducedMotion()
   
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: prefersReducedMotion ? 0 : 40 }}
+      transition={{ duration: prefersReducedMotion ? 0.1 : 0.8, delay: prefersReducedMotion ? 0 : delay, ease: [0.16, 1, 0.3, 1] }}
       className={className}
     >
       {children}
@@ -22,121 +27,61 @@ const Reveal = ({ children, delay = 0, className = '' }) => {
   )
 }
 
-// Wavy Background Component
-const WavyBackground = () => {
-  const canvasRef = useRef(null)
-  
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    let animationId
-    let time = 0
-    
-    const resize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-    resize()
-    window.addEventListener('resize', resize)
-    
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      time += 0.003
-      
-      const waves = [
-        { y: canvas.height * 0.5, amplitude: 80, frequency: 0.003, speed: 1, alpha: 0.03 },
-        { y: canvas.height * 0.55, amplitude: 60, frequency: 0.004, speed: 1.2, alpha: 0.025 },
-        { y: canvas.height * 0.45, amplitude: 100, frequency: 0.002, speed: 0.8, alpha: 0.02 },
-      ]
-      
-      waves.forEach(wave => {
-        ctx.beginPath()
-        ctx.moveTo(0, canvas.height)
-        
-        for (let x = 0; x <= canvas.width; x += 3) {
-          const y = wave.y + 
-            Math.sin(x * wave.frequency + time * wave.speed) * wave.amplitude +
-            Math.sin(x * wave.frequency * 0.5 + time * wave.speed * 0.7) * wave.amplitude * 0.5
-          ctx.lineTo(x, y)
-        }
-        
-        ctx.lineTo(canvas.width, canvas.height)
-        ctx.closePath()
-        
-        const gradient = ctx.createLinearGradient(0, wave.y - wave.amplitude, 0, canvas.height)
-        gradient.addColorStop(0, `rgba(255, 255, 255, ${wave.alpha})`)
-        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)')
-        ctx.fillStyle = gradient
-        ctx.fill()
-      })
-      
-      animationId = requestAnimationFrame(draw)
-    }
-    
-    draw()
-    
-    return () => {
-      cancelAnimationFrame(animationId)
-      window.removeEventListener('resize', resize)
-    }
-  }, [])
-  
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
-}
 
 // Hero Section
 const HeroSection = () => {
-  const [currentStep, setCurrentStep] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(true)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [autoplayFailed, setAutoplayFailed] = useState(false)
   const videoRef = useRef(null)
   const sectionRef = useRef(null)
+  const prefersReducedMotion = useReducedMotion()
   
-  const steps = [
-    { text: "Describe" },
-    { text: "Generate" },
-    { text: "Play" },
-    { text: "Publish" },
-  ]
-
   const togglePlayPause = () => {
     if (videoRef.current) {
       if (isPlaying) {
         videoRef.current.pause()
+        setIsPlaying(false)
       } else {
-        videoRef.current.play().catch(() => {})
+        videoRef.current.play()
+          .then(() => {
+            setIsPlaying(true)
+            setAutoplayFailed(false)
+          })
+          .catch(() => {
+            setAutoplayFailed(true)
+          })
       }
-      setIsPlaying(!isPlaying)
     }
   }
 
   useEffect(() => {
+    if (prefersReducedMotion) return // Don't autoplay if user prefers reduced motion
+    
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { 
-        videoRef.current?.play().catch(() => {})
-        setIsPlaying(true)
-      } else { 
-        videoRef.current?.pause()
+      if (entry.isIntersecting && videoRef.current) { 
+        videoRef.current.play()
+          .then(() => {
+            setIsPlaying(true)
+            setAutoplayFailed(false)
+          })
+          .catch(() => {
+            setAutoplayFailed(true)
+            setIsPlaying(false)
+          })
+      } else if (videoRef.current) { 
+        videoRef.current.pause()
         setIsPlaying(false)
       }
     }, { threshold: 0.3 })
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
-  }, [])
-
-  const handleTimeUpdate = () => {
-    if (videoRef.current && videoRef.current.duration) {
-      const progress = videoRef.current.currentTime / videoRef.current.duration
-      setCurrentStep(Math.min(Math.floor(progress * steps.length), steps.length - 1))
-    }
-  }
-
-  const stepColors = ['text-blue-400', 'text-purple-400', 'text-green-400', 'text-orange-400']
-  const glowColors = ['bg-blue-500/10', 'bg-purple-500/10', 'bg-green-500/10', 'bg-orange-500/10']
+  }, [prefersReducedMotion])
 
   return (
     <section ref={sectionRef} className="relative min-h-[100dvh] w-full flex items-center justify-center px-4 sm:px-6 bg-black overflow-hidden">
-      <WavyBackground />
+      {/* Simple gradient background - cleaner than animated waves */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-neutral-950 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.03)_0%,_transparent_70%)] pointer-events-none" />
       
       <div className="relative z-10 max-w-5xl mx-auto w-full py-12 sm:py-20">
         {/* Mobile: Stack vertically with phone first for visual impact */}
@@ -148,60 +93,26 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white tracking-tight leading-[1.1] mb-3 sm:mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-[1.1] mb-4 sm:mb-5"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
-              Type a sentence.<br />
-              <span className="text-white/30">Get a game.</span>
+              <span className="text-white/50">Type a sentence.</span><br />
+              <span className="text-white">Get a game.</span>
             </motion.h1>
             
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="text-sm sm:text-base text-white/40 max-w-sm mx-auto lg:mx-0 mb-5 sm:mb-6"
+              className="text-sm sm:text-base text-white/60 max-w-sm mx-auto lg:mx-0 mb-5 sm:mb-6"
             >
               AI turns your words into playable 3D games in minutes.
             </motion.p>
             
-            {/* Animated Steps - Simplified on mobile */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-center justify-center lg:justify-start gap-0.5 sm:gap-1 mb-6 sm:mb-8 overflow-x-auto pb-2 scrollbar-hide"
-            >
-              {steps.map((step, i) => (
-                <div key={i} className="flex items-center flex-shrink-0">
-                  <motion.div
-                    animate={{
-                      scale: currentStep === i ? 1 : 0.95,
-                      opacity: currentStep === i ? 1 : currentStep > i ? 0.6 : 0.3,
-                    }}
-                    className={`flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium transition-all duration-500 ${
-                      currentStep === i 
-                        ? 'bg-white/10 text-white border border-white/20' 
-                        : currentStep > i 
-                          ? 'text-white/40' 
-                          : 'text-white/20'
-                    }`}
-                  >
-                    <span className={`w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full transition-all duration-300 ${
-                      currentStep === i ? 'bg-white' : currentStep > i ? 'bg-white/40' : 'bg-white/10'
-                    }`} />
-                    <span>{step.text}</span>
-                  </motion.div>
-                  {i < steps.length - 1 && (
-                    <div className={`w-2 sm:w-4 h-px transition-all duration-500 ${currentStep > i ? 'bg-white/30' : 'bg-white/10'}`} />
-                  )}
-                </div>
-              ))}
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
             >
               <ExternalLink 
                 href="https://play.google.com/store/apps/details?id=com.nextap.vibebrews&pli=1" 
@@ -226,79 +137,61 @@ const HeroSection = () => {
             className="flex-shrink-0"
           >
             <div className="relative">
-              <motion.div
-                animate={{ scale: [1, 1.02, 1] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute -inset-6 sm:-inset-8 rounded-[3rem] sm:rounded-[4rem] blur-2xl transition-all duration-1000 ${glowColors[currentStep]}`}
-              />
+              {/* Subtle white glow behind phone */}
+              <div className="absolute -inset-6 sm:-inset-8 rounded-[3rem] sm:rounded-[4rem] blur-2xl bg-white/[0.07]" />
               
               <div className="relative w-[180px] sm:w-[220px] md:w-[260px] bg-[#1C1C1E] rounded-[2rem] sm:rounded-[2.5rem] p-1.5 sm:p-2 shadow-2xl">
                 <div className="absolute top-2 sm:top-3 left-1/2 -translate-x-1/2 w-14 sm:w-20 h-4 sm:h-6 bg-black rounded-full z-10" />
                 <div className="relative rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-black" style={{ aspectRatio: '9/19.5' }}>
+                  {/* Video with poster fallback - shows a game screenshot if autoplay fails */}
                   <video 
                     ref={videoRef} 
                     className="absolute inset-0 w-full h-full object-cover" 
                     muted 
                     playsInline 
-                    loop 
-                    onTimeUpdate={handleTimeUpdate}
+                    loop
+                    poster="/screenshots/gameplay-dissolved.jpg"
                   >
                     <source src="/hero-demo.webm" type="video/webm" />
                   </video>
                   
-                  <button 
-                    onClick={togglePlayPause}
-                    className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 w-7 sm:w-8 h-7 sm:h-8 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/80 hover:bg-black/70 hover:text-white hover:scale-110 transition-all duration-200 z-20"
-                  >
-                    {isPlaying ? (
-                      <svg className="w-3 sm:w-3.5 h-3 sm:h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                  {/* Center play button when autoplay fails or video is paused */}
+                  {(autoplayFailed || !isPlaying) && (
+                    <button
+                      onClick={togglePlayPause}
+                      aria-label="Play video"
+                      className="absolute inset-0 flex items-center justify-center bg-black/30 z-10 transition-opacity duration-300"
+                    >
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg hover:bg-white hover:scale-110 active:scale-95 transition-all duration-200">
+                        <svg className="w-6 h-6 sm:w-7 sm:h-7 text-black ml-1" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </button>
+                  )}
+                  
+                  {/* Play/Pause button with 44px touch target - only show when playing */}
+                  {isPlaying && (
+                    <button 
+                      onClick={togglePlayPause}
+                      aria-label="Pause video"
+                      className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 w-11 h-11 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/90 hover:bg-black/80 hover:text-white hover:scale-105 active:scale-95 transition-all duration-200 z-20"
+                    >
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                         <rect x="6" y="4" width="4" height="16" rx="1" />
                         <rect x="14" y="4" width="4" height="16" rx="1" />
                       </svg>
-                    ) : (
-                      <svg className="w-3 sm:w-3.5 h-3 sm:h-3.5 ml-0.5" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    )}
-                  </button>
+                    </button>
+                  )}
                 </div>
                 <div className="absolute bottom-1.5 sm:bottom-2 left-1/2 -translate-x-1/2 w-14 sm:w-20 h-0.5 sm:h-1 bg-white/20 rounded-full" />
               </div>
               
-              <motion.div
-                animate={{ opacity: [0.7, 1, 0.7] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className={`absolute -bottom-6 sm:-bottom-8 left-1/2 -translate-x-1/2 text-[10px] sm:text-[11px] font-medium tracking-wider uppercase ${stepColors[currentStep]}`}
-              >
-                {currentStep === 0 ? 'Describing...' : 
-                 currentStep === 1 ? 'Generating...' : 
-                 currentStep === 2 ? 'Playing...' : 
-                 'Publishing...'}
-              </motion.div>
             </div>
           </motion.div>
         </div>
       </div>
       
-      {/* Scroll hint - Hidden on very small screens */}
-      <motion.a
-        href="#demo"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 text-white/15 hover:text-white/30 transition-colors hidden sm:block"
-      >
-        <motion.svg
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-5 h-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7" />
-        </motion.svg>
-      </motion.a>
     </section>
   )
 }
@@ -650,11 +543,11 @@ const ToolsSection = () => {
     <section className="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-black to-[#0a0a0a] relative z-20">
       <div className="max-w-5xl mx-auto">
         <Reveal className="text-center mb-8 sm:mb-12">
-          <p className="text-[10px] sm:text-xs font-medium tracking-widest text-white/40 uppercase mb-2">Free Tools</p>
+          <p className="text-[10px] sm:text-xs font-medium tracking-widest text-white/50 uppercase mb-2">Free Tools</p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-semibold text-white mb-2 sm:mb-3 tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             Creator Tools Suite
           </h2>
-          <p className="text-xs sm:text-sm text-white/50 max-w-md mx-auto">Useful AI-powered tools to help you create. No signup required.</p>
+          <p className="text-xs sm:text-sm text-white/60 max-w-md mx-auto">Useful AI-powered tools to help you create. No signup required.</p>
         </Reveal>
         
         {/* Mobile: Horizontal scroll | Desktop: Grid */}
@@ -669,11 +562,10 @@ const ToolsSection = () => {
                   to={tool.path}
                   className="flex-shrink-0 w-[260px] sm:w-[280px] lg:w-full group"
                 >
-                  <motion.div
-                    whileHover={{ y: -4, scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ duration: 0.2 }}
-                    className="relative h-full bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] hover:border-white/[0.12] rounded-2xl p-4 sm:p-5 transition-all duration-300"
+                  <ContinuousCard
+                    hoverScale={1.02}
+                    tiltAmount={8}
+                    className="relative h-full bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] rounded-2xl p-4 sm:p-5 transition-colors duration-300"
                   >
                     <div className="flex items-start gap-3 sm:gap-4">
                       <div 
@@ -686,7 +578,7 @@ const ToolsSection = () => {
                         <h3 className="text-sm sm:text-base font-semibold text-white mb-0.5 sm:mb-1 group-hover:text-white/90 transition-colors">
                           {tool.title}
                         </h3>
-                        <p className="text-xs sm:text-sm text-white/40 leading-snug line-clamp-2">
+                        <p className="text-xs sm:text-sm text-white/55 leading-snug line-clamp-2">
                           {tool.description}
                         </p>
                       </div>
@@ -694,7 +586,7 @@ const ToolsSection = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                       </svg>
                     </div>
-                  </motion.div>
+                  </ContinuousCard>
                 </Link>
               </Reveal>
             ))}
@@ -736,11 +628,11 @@ const GameShowcaseSection = () => {
       
       <div className="max-w-5xl mx-auto relative w-full">
         <Reveal className="text-center mb-6 sm:mb-10 px-2">
-          <p className="text-[10px] sm:text-xs font-medium tracking-widest text-white/40 uppercase mb-2">Community</p>
+          <p className="text-[10px] sm:text-xs font-medium tracking-widest text-white/50 uppercase mb-2">Community</p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-semibold text-white mb-2 sm:mb-3 tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             Made by users like you.
           </h2>
-          <p className="text-xs sm:text-sm text-white/50 max-w-md mx-auto">Every game started as a single sentence. No code required.</p>
+          <p className="text-xs sm:text-sm text-white/60 max-w-md mx-auto">Every game started as a single sentence. No code required.</p>
         </Reveal>
         
         {/* Mobile: Horizontal scroll | Desktop: Flex wrap */}
@@ -751,27 +643,24 @@ const GameShowcaseSection = () => {
           <div className="flex sm:flex-wrap sm:justify-center gap-3 pb-6 overflow-x-auto scrollbar-hide px-2 sm:px-0 -mx-4 sm:mx-0 pl-4 sm:pl-0">
             {games.map((game, i) => (
               <Reveal key={i} delay={i * 0.05}>
-                <motion.div
-                  whileHover={{ y: -8, scale: 1.05 }}
-                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                <ContinuousCard
+                  hoverScale={1.05}
+                  tiltAmount={12}
                   className="relative flex-shrink-0"
                   style={{ transform: `translateY(${i % 2 === 0 ? '0' : '24px'})` }}
                 >
                   <div className="relative bg-[#1C1C1E] rounded-[1.75rem] sm:rounded-[2.5rem] p-[4px] sm:p-[6px] shadow-lg hover:shadow-2xl transition-shadow duration-300">
                     <div className="relative bg-black rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden">
-                      <div className="relative overflow-hidden" style={{ width: 'clamp(120px, 30vw, 160px)', height: 'clamp(240px, 60vw, 320px)' }}>
-                        <img 
+                      <div className="relative" style={{ width: 'clamp(120px, 30vw, 160px)', height: 'clamp(240px, 60vw, 320px)' }}>
+                        <ContinuousImage 
                           src={game.image} 
-                          alt={game.alt} 
-                          loading="lazy" 
-                          className="absolute w-full h-auto object-cover" 
-                          style={{ top: '-28px', left: '0', minHeight: 'calc(100% + 28px)' }}
+                          alt={game.alt}
                         />
                       </div>
                       <div className="absolute bottom-1.5 sm:bottom-2 left-1/2 -translate-x-1/2 w-12 sm:w-16 h-[2px] sm:h-[3px] bg-white/20 rounded-full" />
                     </div>
                   </div>
-                </motion.div>
+                </ContinuousCard>
               </Reveal>
             ))}
           </div>
@@ -793,24 +682,28 @@ const GameShowcaseSection = () => {
   )
 }
 
-// iOS Waitlist
+// iOS Waitlist - with Continuous UI components
 const IOSWaitlist = () => {
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState('idle')
-  const [message, setMessage] = useState('')
+  const [buttonState, setButtonState] = useState('idle') // idle | loading | success | error
+  const [inputError, setInputError] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setInputError('')
+    
     if (!email || !email.includes('@')) {
-      setStatus('error')
-      setMessage('Please enter a valid email')
+      setInputError('Please enter a valid email')
+      setButtonState('error')
+      setTimeout(() => setButtonState('idle'), 2000)
       return
     }
-    setStatus('loading')
+    
+    setButtonState('loading')
     setTimeout(() => {
-      setStatus('success')
-      setMessage("You're on the list!")
+      setButtonState('success')
       setEmail('')
+      setTimeout(() => setButtonState('idle'), 3000)
     }, 800)
   }
 
@@ -821,30 +714,35 @@ const IOSWaitlist = () => {
           <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-semibold text-white mb-2 sm:mb-3" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             iOS coming soon.
           </h2>
-          <p className="text-xs sm:text-sm text-white/50 mb-5 sm:mb-6">Join the waitlist to be first to know.</p>
+          <p className="text-xs sm:text-sm text-white/60 mb-5 sm:mb-6">Join the waitlist to be first to know.</p>
         </Reveal>
         
         <Reveal delay={0.1}>
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 sm:gap-3 max-w-md mx-auto">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
-              disabled={status === 'loading' || status === 'success'}
-              className="flex-1 px-4 sm:px-5 py-3 sm:py-3.5 bg-white/5 border border-white/10 rounded-full text-white text-sm sm:text-base placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/[0.08] transition-all disabled:opacity-50"
-            />
-            <motion.button
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 sm:gap-3 max-w-md mx-auto items-start">
+            <div className="flex-1 w-full">
+              <ContinuousInput
+                type="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                  if (inputError) setInputError('')
+                }}
+                placeholder="your@email.com"
+                disabled={buttonState === 'loading' || buttonState === 'success'}
+                error={inputError}
+                className="text-sm sm:text-base"
+              />
+            </div>
+            <ContinuousButton
               type="submit"
-              disabled={status === 'loading' || status === 'success'}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className={`px-5 sm:px-6 py-3 sm:py-3.5 rounded-full font-semibold text-sm sm:text-base transition-all disabled:opacity-50 ${status === 'success' ? 'bg-green-500 text-black' : 'bg-white text-black hover:bg-white/90'}`}
-            >
-              {status === 'loading' ? 'Joining...' : status === 'success' ? 'Joined!' : 'Notify me'}
-            </motion.button>
+              state={buttonState}
+              disabled={buttonState === 'loading' || buttonState === 'success'}
+              idleText="Notify me"
+              successText="Joined!"
+              errorText="Try again"
+              className="w-full sm:w-auto text-sm sm:text-base"
+            />
           </form>
-          {message && <p className={`mt-3 sm:mt-4 text-xs sm:text-sm ${status === 'error' ? 'text-red-400' : 'text-green-400'}`}>{message}</p>}
           <p className="mt-4 sm:mt-6 text-[10px] sm:text-xs text-white/30">No spam. Unsubscribe anytime.</p>
         </Reveal>
       </div>
@@ -852,7 +750,7 @@ const IOSWaitlist = () => {
   )
 }
 
-// Feed Section
+// Feed Section - with Continuous UI image loading
 const FeedSection = () => (
   <section className="min-h-[70vh] sm:min-h-screen py-12 sm:py-16 px-4 sm:px-6 bg-[#0a0a0a] relative z-20 overflow-hidden flex items-center">
     <div className="max-w-5xl mx-auto w-full">
@@ -861,36 +759,46 @@ const FeedSection = () => (
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-display font-bold text-white leading-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             Discover. Play. Share.
           </h2>
-          <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-base text-white/50 leading-relaxed">
+          <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-base text-white/60 leading-relaxed">
             <p>Every game lives in a scrollable feed. Find something interesting, tap to play — no downloads needed.</p>
             <p>Your games go to the same feed. Others can discover, play, and share them instantly.</p>
           </div>
         </Reveal>
         <Reveal delay={0.2} className="flex justify-center lg:justify-end order-1 lg:order-2">
-          <div className="relative w-[180px] sm:w-[220px] md:w-[240px] bg-[#1C1C1E] rounded-[2rem] sm:rounded-[2.5rem] p-1.5 sm:p-2 border border-white/10 shadow-xl">
+          <ContinuousCard
+            hoverScale={1.03}
+            tiltAmount={10}
+            className="relative w-[180px] sm:w-[220px] md:w-[240px] bg-[#1C1C1E] rounded-[2rem] sm:rounded-[2.5rem] p-1.5 sm:p-2 border border-white/10 shadow-xl"
+          >
             <div className="absolute top-3 sm:top-4 left-1/2 -translate-x-1/2 w-14 sm:w-20 h-4 sm:h-6 bg-black rounded-full z-10" />
             <div className="relative rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-black">
-              <img src="/screenshots/gameplay-dissolved.jpg" alt="Game being played in the VibeBrews feed" loading="lazy" className="w-full h-auto" />
+              <ContinuousImage 
+                src="/screenshots/gameplay-dissolved.jpg" 
+                alt="Game being played in the VibeBrews feed"
+                className="w-full h-auto" 
+              />
             </div>
             <div className="absolute bottom-1.5 sm:bottom-2 left-1/2 -translate-x-1/2 w-14 sm:w-20 h-0.5 sm:h-1 bg-white/20 rounded-full" />
-          </div>
+          </ContinuousCard>
         </Reveal>
       </div>
     </div>
   </section>
 )
 
-// P2P Section
+// P2P Section - Reduced animation cycle for better engagement
 const P2PSection = () => {
   const [step, setStep] = useState(0)
+  const prefersReducedMotion = useReducedMotion()
   
   useEffect(() => {
-    const STEP_DURATIONS = [4000, 4000, 4000, 4000, 5000]
+    // Reduced from 21s total to 14s for better engagement
+    const STEP_DURATIONS = [2500, 2500, 2500, 2500, 4000]
     const timeout = setTimeout(() => {
       setStep(prev => (prev + 1) % 5)
-    }, STEP_DURATIONS[step])
+    }, prefersReducedMotion ? STEP_DURATIONS[step] * 0.5 : STEP_DURATIONS[step])
     return () => clearTimeout(timeout)
-  }, [step])
+  }, [step, prefersReducedMotion])
   
   const isConnected = step >= 4
   
@@ -1049,7 +957,7 @@ const CTASection = () => (
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-white leading-[1.1] tracking-tight mb-4 sm:mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
           Start creating.
         </h2>
-        <p className="text-sm sm:text-base text-white/50 mb-6 sm:mb-8">Free on Android. Your first game is 2 minutes away.</p>
+        <p className="text-sm sm:text-base text-white/60 mb-6 sm:mb-8">Free on Android. Your first game is 2 minutes away.</p>
         
         <ExternalLink 
           href="https://play.google.com/store/apps/details?id=com.nextap.vibebrews&pli=1" 

@@ -4,10 +4,10 @@ import Sidebar from './Sidebar'
 import { motion, AnimatePresence } from 'framer-motion'
 
 // Tool pages that have light themes
-const lightThemePages = ['/tools', '/color-palette-generator', '/ai-token-calculator', '/ai-model-picker', '/prompt-remix', '/legal-doc-generator', '/context-window-visualizer', '/ship-safe-scanner', '/vibe-cost-calculator']
+const lightThemePages = ['/tools', '/blogs', '/color-palette-generator', '/ai-token-calculator', '/ai-model-picker', '/prompt-remix', '/legal-doc-generator', '/context-window-visualizer', '/ship-safe-scanner', '/vibe-cost-calculator']
 
 export default function Layout({ children }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(true) // Default open on desktop
   const [isMobile, setIsMobile] = useState(false)
   const location = useLocation()
   const isLightTheme = lightThemePages.includes(location.pathname)
@@ -122,7 +122,11 @@ export default function Layout({ children }) {
       </AnimatePresence>
 
       {/* Sidebar */}
-      <Sidebar isOpen={sidebarOpen || !isMobile} isMobile={isMobile} />
+      <Sidebar 
+        isOpen={isMobile ? sidebarOpen : sidebarOpen} 
+        isMobile={isMobile} 
+        onToggle={() => setSidebarOpen(!sidebarOpen)}
+      />
 
       {/* Mobile overlay */}
       <AnimatePresence>
@@ -139,14 +143,20 @@ export default function Layout({ children }) {
       </AnimatePresence>
 
       {/* Main content */}
-      <main
+      <motion.main
         id="main-content"
-        className={`min-h-screen transition-all duration-500 ease-[var(--ease-out-expo)] ${
-          isMobile ? 'ml-0 pt-14' : 'ml-[260px]'
-        }`}
+        initial={false}
+        animate={{
+          marginLeft: isMobile ? 0 : sidebarOpen ? 260 : 0,
+        }}
+        transition={{ 
+          duration: 0.35, 
+          ease: [0.32, 0.72, 0, 1]
+        }}
+        className={`min-h-screen ${isMobile ? 'pt-14' : ''}`}
       >
         {children}
-      </main>
+      </motion.main>
     </div>
   )
 }

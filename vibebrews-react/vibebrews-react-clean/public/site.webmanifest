@@ -1,0 +1,21 @@
+{
+  "name": "VibeBrews - Create Multiplayer Games by Talking",
+  "short_name": "VibeBrews",
+  "description": "Create games by describing them. AI generates playable HTML5 multiplayer games in minutes. No coding required.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0a0a0a",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "/vibebrews-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/vibebrews-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

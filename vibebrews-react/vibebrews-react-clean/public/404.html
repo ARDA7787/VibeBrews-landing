@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found - VibeBrews</title>
+  <meta name="description" content="The page you're looking for doesn't exist.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#6366f1">
+  
+  <!-- Redirect to index for SPA routing -->
+  <script>
+    // For static hosts that don't support SPA routing natively
+    // This redirects 404s back to the app which handles routing
+    const path = window.location.pathname + window.location.search + window.location.hash;
+    if (path !== '/404.html') {
+      // Store the intended path and redirect to root
+      sessionStorage.setItem('redirectPath', path);
+      window.location.replace('/');
+    }
+  </script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .container {
+      max-width: 500px;
+    }
+    
+    h1 {
+      font-size: 6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #e5e5e5;
+    }
+    
+    p {
+      color: #a3a3a3;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    
+    a {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>404</h1>
+    <h2>Page Not Found</h2>
+    <p>The page you're looking for doesn't exist or has been moved. Let's get you back to creating games!</p>
+    <a href="/">Back to Home</a>
+  </div>
+</body>
+</html>

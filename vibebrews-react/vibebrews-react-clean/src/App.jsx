@@ -16,6 +16,7 @@ import The3amScroll from './pages/The3amScroll'
 import IdeasDie from './pages/IdeasDie'
 import TheAIRace from './pages/TheAIRace'
 import Tools from './pages/Tools'
+import Blogs from './pages/Blogs'
 import ColorPalette from './pages/ColorPalette'
 import TokenBurner from './pages/TokenBurner'
 import ModelPicker from './pages/ModelPicker'
@@ -79,6 +80,7 @@ function App() {
             <Route path="/why-your-ideas-die-in-your-notes-app" element={<IdeasDie />} />
             <Route path="/everyone-racing-against-ai" element={<TheAIRace />} />
             <Route path="/tools" element={<Tools />} />
+            <Route path="/blogs" element={<Blogs />} />
             <Route path="/color-palette-generator" element={<ColorPalette />} />
             <Route path="/ai-token-calculator" element={<TokenBurner />} />
             <Route path="/ai-model-picker" element={<ModelPicker />} />

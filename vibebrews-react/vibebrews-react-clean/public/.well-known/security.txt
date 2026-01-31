@@ -1,0 +1,9 @@
+# Security Policy for VibeBrews
+# https://securitytxt.org/
+
+Contact: mailto:nextap.head@gmail.com
+Preferred-Languages: en
+Canonical: https://vibebrews.com/.well-known/security.txt
+
+# If you discover a security vulnerability, please report it to us.
+# We appreciate your help in keeping VibeBrews secure.

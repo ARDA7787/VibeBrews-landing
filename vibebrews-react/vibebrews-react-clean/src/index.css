@@ -20,6 +20,23 @@
   
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Apple-style Continuous UI Animation Constants */
+  --duration-instant: 100ms;
+  --duration-quick: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-morph: 500ms;
+  
+  /* Spring Curves */
+  --spring-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --spring-smooth: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --spring-decel: cubic-bezier(0.0, 0.0, 0.2, 1);
+  --spring-apple: cubic-bezier(0.16, 1, 0.3, 1);
+  
+  /* Layout Spring Values (for JS) */
+  --layout-stiffness: 300;
+  --layout-damping: 30;
 }
 
 * {

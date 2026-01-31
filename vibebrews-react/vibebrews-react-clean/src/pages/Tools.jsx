@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
+import ContinuousCard from '../components/ContinuousCard'
+import ContinuousImage from '../components/ContinuousImage'
 
 // SEO
 const SEO_TITLE = 'Free AI & Creator Tools | VibeBrews Utility Suite 2026'
@@ -242,7 +244,7 @@ const SearchBar = ({ onSearch, isExpanded, setIsExpanded }) => {
   )
 }
 
-// Minimal Tool Card
+// Minimal Tool Card - with Continuous UI touch-aware interactions
 const ToolCard = ({ tool, index }) => {
   return (
     <motion.div
@@ -254,8 +256,12 @@ const ToolCard = ({ tool, index }) => {
       className="group"
     >
       <Link to={tool.path} className="block h-full">
-        <div className="relative h-full bg-white rounded-3xl p-5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 overflow-hidden">
-          
+        <ContinuousCard
+          hoverScale={1.02}
+          tiltAmount={8}
+          enableSpotlight={true}
+          className="relative h-full bg-white rounded-3xl p-5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden"
+        >
           {/* Top Section: Icon & Tags */}
           <div className="flex justify-between items-start mb-4">
             <div 
@@ -287,22 +293,31 @@ const ToolCard = ({ tool, index }) => {
 
           {/* Hover Image Reveal */}
           <div className="absolute top-0 right-0 w-32 h-32 opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none translate-x-8 -translate-y-8">
-             <img src={tool.image} alt="" className="w-full h-full object-contain" />
+             <ContinuousImage src={tool.image} alt="" className="w-full h-full object-contain" />
           </div>
-        </div>
+        </ContinuousCard>
       </Link>
     </motion.div>
   )
 }
 
-// Featured Large Card
+// Featured Large Card - with Continuous UI interactions
 const FeaturedCard = ({ tool }) => {
   return (
     <Link to={tool.path} className="block group relative w-full h-full min-h-[280px]">
-      <div className="absolute inset-0 bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgb(0,0,0,0.08)] transition-all duration-500 group-hover:shadow-[0_30px_60px_rgb(0,0,0,0.12)] group-hover:scale-[1.01] overflow-hidden">
+      <ContinuousCard
+        hoverScale={1.01}
+        tiltAmount={5}
+        enableSpotlight={true}
+        className="absolute inset-0 bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgb(0,0,0,0.08)] overflow-hidden"
+      >
         {/* Background Image with Gradient */}
         <div className="absolute inset-0">
-          <img src={tool.image} alt="" className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" />
+          <ContinuousImage 
+            src={tool.image} 
+            alt="" 
+            className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" 
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent" />
         </div>
 
@@ -328,7 +343,7 @@ const FeaturedCard = ({ tool }) => {
             </svg>
           </div>
         </div>
-      </div>
+      </ContinuousCard>
     </Link>
   )
 }
