@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
 import ExternalLink from '../components/ExternalLink'
+import useSEO from '../hooks/useSEO'
 
 const Reveal = ({ children, delay = 0, className = '' }) => {
   const ref = useRef(null)
@@ -84,6 +85,13 @@ const faqs = [
 ]
 
 export default function IHaveAnIdea() {
+  useSEO({
+    title: 'I Have a Game Idea But Can\'t Code - Here\'s What to Do | VibeBrews',
+    description: 'You have a game idea but no coding skills? Learn the 4 paths from idea to playable game, including the new AI-powered option that takes minutes, not months.',
+    keywords: 'i have a game idea, game idea no coding, turn game idea into reality, game development for beginners, ai game creator',
+    canonical: 'https://vibebrews.com/i-have-a-game-idea',
+  })
+
   return (
     <PageTransition>
       <div className="min-h-screen bg-black text-white/60">

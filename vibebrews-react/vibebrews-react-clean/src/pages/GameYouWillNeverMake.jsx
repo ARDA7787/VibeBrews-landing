@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
 import ExternalLink from '../components/ExternalLink'
+import useSEO from '../hooks/useSEO'
 
 const Reveal = ({ children, delay = 0, className = '' }) => {
   const ref = useRef(null)
@@ -22,6 +23,12 @@ const Reveal = ({ children, delay = 0, className = '' }) => {
 }
 
 export default function GameYouWillNeverMake() {
+  useSEO({
+    title: 'The Game You Will Never Make - Why Most Game Ideas Stay Dreams | VibeBrews',
+    description: 'Most game ideas die before they start. Learn why your dream game stays unreleased and how AI tools are changing the equation for solo creators.',
+    keywords: 'game ideas, indie game development, make a game, game development motivation, solo game developer, unreleased game',
+    canonical: 'https://vibebrews.com/the-game-you-will-never-make',
+  })
   return (
     <PageTransition>
       <div className="min-h-screen bg-[#030303] text-white/60">

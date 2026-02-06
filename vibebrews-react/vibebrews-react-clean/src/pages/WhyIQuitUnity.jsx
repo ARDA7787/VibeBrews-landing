@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
 import ExternalLink from '../components/ExternalLink'
+import useSEO from '../hooks/useSEO'
 
 const Reveal = ({ children, delay = 0, className = '' }) => {
   const ref = useRef(null)
@@ -29,6 +30,13 @@ const stats = [
 ]
 
 export default function WhyIQuitUnity() {
+  useSEO({
+    title: 'Why I Stopped Learning Unity - The Case for AI Game Creation | VibeBrews',
+    description: 'After months learning Unity, I found a faster way to make games. Here\'s why AI game generators are changing the game for indie creators.',
+    keywords: 'unity alternative, stop learning unity, ai game maker, indie game development, unity vs ai, game engine alternative',
+    canonical: 'https://vibebrews.com/why-i-stopped-learning-unity',
+  })
+
   return (
     <PageTransition>
       <div className="min-h-screen bg-black text-white/60">

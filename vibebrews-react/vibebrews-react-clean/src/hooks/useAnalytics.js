@@ -106,6 +106,7 @@ const PAGE_TITLES = {
   '/why-your-ideas-die-in-your-notes-app': 'Why Your Ideas Die in Your Notes App',
   '/everyone-racing-against-ai': 'Everyone Racing Against AI',
   '/tools': 'Tools',
+  '/blogs': 'Blog',
   '/color-palette-generator': 'Color Palette Generator',
   '/ai-token-calculator': 'AI Token Calculator',
   '/ai-model-picker': 'AI Model Picker',

@@ -355,7 +355,10 @@ export default function Tools() {
   // SEO
   useEffect(() => {
     document.title = SEO_TITLE
-    // ... (meta tags logic same as before)
+    const metaDesc = document.querySelector('meta[name="description"]')
+    if (metaDesc) metaDesc.setAttribute('content', SEO_DESC)
+    const metaKeywords = document.querySelector('meta[name="keywords"]')
+    if (metaKeywords) metaKeywords.setAttribute('content', SEO_KEYWORDS)
   }, [])
 
   const filteredTools = tools.filter(tool => 

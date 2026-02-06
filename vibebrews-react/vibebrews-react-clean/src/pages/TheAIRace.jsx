@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useInView, useSpring } from 'framer-mo
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
 import ExternalLink from '../components/ExternalLink'
+import useSEO from '../hooks/useSEO'
 
 // Reveal animation wrapper
 const Reveal = ({ children, delay = 0, className = '' }) => {
@@ -288,6 +289,13 @@ const StatBlock = ({ number, label, sublabel, color = 'amber' }) => {
 }
 
 export default function TheAIRace() {
+  useSEO({
+    title: 'Everyone is Racing Against AI - Should You? | VibeBrews',
+    description: 'The AI race is on, but not everyone should compete the same way. Learn how creators can leverage AI instead of racing against it.',
+    keywords: 'ai race, competing with ai, ai tools for creators, future of ai, ai in creative work, ai game development',
+    canonical: 'https://vibebrews.com/everyone-racing-against-ai',
+  })
+
   return (
     <PageTransition>
       <div className="min-h-screen bg-[#050508] text-white/60 relative">

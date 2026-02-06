@@ -7,6 +7,7 @@ import ContinuousImage from '../components/ContinuousImage'
 import ContinuousButton from '../components/ContinuousButton'
 import ContinuousCard from '../components/ContinuousCard'
 import ContinuousInput from '../components/ContinuousInput'
+import useSEO from '../hooks/useSEO'
 
 // Reveal animation wrapper with reduced motion support
 const Reveal = ({ children, delay = 0, className = '' }) => {
@@ -1031,6 +1032,13 @@ const Footer = () => (
 
 // Main Home Component
 export default function Home() {
+  useSEO({
+    title: 'VibeBrews - Create Multiplayer Games by Talking',
+    description: 'Create games by describing them. AI generates playable HTML5 multiplayer games in minutes. No coding required. Free on Android.',
+    keywords: 'ai game maker, create games without coding, multiplayer game creator, html5 games, no code game development, vibe coding, game generator',
+    canonical: 'https://vibebrews.com/',
+  })
+
   return (
     <PageTransition>
       <div className="min-h-screen bg-[#050505] text-white selection:bg-[#FF5C00]/30">

@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
 import ExternalLink from '../components/ExternalLink'
+import useSEO from '../hooks/useSEO'
 
 const Reveal = ({ children, delay = 0, className = '' }) => {
   const ref = useRef(null)
@@ -22,6 +23,12 @@ const Reveal = ({ children, delay = 0, className = '' }) => {
 }
 
 export default function CreativeBlock() {
+  useSEO({
+    title: 'The Creative Block is a Lie - How to Unlock Your Creativity | VibeBrews',
+    description: 'Creative block isn\'t real. Learn why you\'re stuck and how to break through with actionable strategies for indie creators and game developers.',
+    keywords: 'creative block, creativity tips, indie creator motivation, game development inspiration, overcome creative block',
+    canonical: 'https://vibebrews.com/the-creative-block-is-a-lie',
+  })
   return (
     <PageTransition>
       <div className="min-h-screen bg-black text-white/60">

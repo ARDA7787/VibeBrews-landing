@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
 import ExternalLink from '../components/ExternalLink'
+import useSEO from '../hooks/useSEO'
 
 const Reveal = ({ children, delay = 0, className = '' }) => {
   const ref = useRef(null)
@@ -22,6 +23,12 @@ const Reveal = ({ children, delay = 0, className = '' }) => {
 }
 
 export default function The3amScroll() {
+  useSEO({
+    title: 'The 3AM Scroll - Why Late-Night Browsing Kills Your Productivity | VibeBrews',
+    description: 'The 3AM scroll is destroying your creativity. Learn how to break the cycle and channel that late-night energy into building something real.',
+    keywords: 'productivity, phone addiction, late night scrolling, digital wellness, creator productivity, screen time',
+    canonical: 'https://vibebrews.com/the-3am-scroll',
+  })
   return (
     <PageTransition>
       <div className="min-h-screen bg-[#020206] text-white/60">

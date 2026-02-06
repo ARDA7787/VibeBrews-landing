@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
 import ExternalLink from '../components/ExternalLink'
+import useSEO from '../hooks/useSEO'
 
 const Reveal = ({ children, delay = 0, className = '' }) => {
   const ref = useRef(null)
@@ -22,6 +23,12 @@ const Reveal = ({ children, delay = 0, className = '' }) => {
 }
 
 export default function DeathOfCoding() {
+  useSEO({
+    title: 'The Death of Coding? Why AI Won\'t Replace Developers | VibeBrews',
+    description: 'Is coding dying? Explore why AI tools augment developers rather than replace them, and how the future of software development is evolving.',
+    keywords: 'death of coding, ai replacing developers, future of programming, ai coding tools, software development future',
+    canonical: 'https://vibebrews.com/the-death-of-coding',
+  })
   return (
     <PageTransition>
       <div className="min-h-screen bg-[#050505] text-white/60">

@@ -3,6 +3,7 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
 import ExternalLink from '../components/ExternalLink'
+import useSEO from '../hooks/useSEO'
 
 const Reveal = ({ children, delay = 0, className = '' }) => {
   const ref = useRef(null)
@@ -126,6 +127,13 @@ const ReadingProgress = () => {
 }
 
 export default function HowToMake() {
+  useSEO({
+    title: 'How to Make a Game Without Coding - Complete 2026 Guide | VibeBrews',
+    description: 'Build your first game without writing a single line of code. A complete guide covering AI game generators, no-code tools, and the fastest path from idea to playable game.',
+    keywords: 'how to make a game, game without coding, no code game maker, ai game generator, beginner game development, make a game for free',
+    canonical: 'https://vibebrews.com/how-to-make-a-game-without-coding',
+  })
+
   return (
     <PageTransition>
       <ReadingProgress />

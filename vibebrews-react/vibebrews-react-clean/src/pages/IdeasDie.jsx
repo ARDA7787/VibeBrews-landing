@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
 import ExternalLink from '../components/ExternalLink'
+import useSEO from '../hooks/useSEO'
 
 const Reveal = ({ children, delay = 0, className = '' }) => {
   const ref = useRef(null)
@@ -22,6 +23,12 @@ const Reveal = ({ children, delay = 0, className = '' }) => {
 }
 
 export default function IdeasDie() {
+  useSEO({
+    title: 'Why Your Ideas Die in Your Notes App | VibeBrews',
+    description: 'Your notes app is where ideas go to die. Learn why writing ideas down isn\'t enough and how to turn them into reality with AI-powered creation tools.',
+    keywords: 'ideas die, notes app, idea to reality, creative execution, turn ideas into games, indie creator tips',
+    canonical: 'https://vibebrews.com/why-your-ideas-die-in-your-notes-app',
+  })
   return (
     <PageTransition>
       <div className="min-h-screen bg-[#020206] text-white/60">

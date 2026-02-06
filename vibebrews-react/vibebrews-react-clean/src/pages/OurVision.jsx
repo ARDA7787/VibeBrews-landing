@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import PageTransition from '../components/PageTransition'
 import ExternalLink from '../components/ExternalLink'
 import { Link } from 'react-router-dom'
+import useSEO from '../hooks/useSEO'
 
 // Reveal animation wrapper
 const Reveal = ({ children, delay = 0, className = '' }) => {
@@ -126,6 +127,13 @@ const TimelineItem = ({ icon, title, text }) => (
 )
 
 export default function OurVision() {
+  useSEO({
+    title: 'Our Vision - Making Game Creation Universal | VibeBrews',
+    description: 'VibeBrews believes everyone should be able to create games. Our vision is to democratize game development through AI, making creation as easy as conversation.',
+    keywords: 'vibebrews vision, ai game creation, democratize game development, future of game making, game creation for everyone',
+    canonical: 'https://vibebrews.com/our-vision',
+  })
+
   return (
     <PageTransition>
       <div className="min-h-screen bg-black text-white/56">

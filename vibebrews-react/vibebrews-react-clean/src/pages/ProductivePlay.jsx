@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
 import ExternalLink from '../components/ExternalLink'
+import useSEO from '../hooks/useSEO'
 
 const Reveal = ({ children, delay = 0, className = '' }) => {
   const ref = useRef(null)
@@ -22,6 +23,12 @@ const Reveal = ({ children, delay = 0, className = '' }) => {
 }
 
 export default function ProductivePlay() {
+  useSEO({
+    title: 'Productive Things to Do on Your Phone Instead of Scrolling | VibeBrews',
+    description: 'Stop doom-scrolling. Discover productive and creative things you can do on your phone, from game creation to learning new skills.',
+    keywords: 'productive phone activities, stop scrolling, phone productivity, creative apps, productive things to do on phone',
+    canonical: 'https://vibebrews.com/productive-things-to-do-on-phone',
+  })
   return (
     <PageTransition>
       <div className="min-h-screen bg-[#050505] text-white/60">
